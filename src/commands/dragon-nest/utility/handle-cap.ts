@@ -1,6 +1,6 @@
 import { EmbedBuilder } from "discord.js";
 import { calculateCap } from "./calculate-cap";
-import { CapStatType } from "../data/cap-defaults-schema";
+import { LOWEST_LB } from "../data/constants";
 
 export const handleCap = (lb: number) => {
   const capValue = calculateCap(lb);
@@ -8,7 +8,7 @@ export const handleCap = (lb: number) => {
     .setColor("#5679EF")
     .setTitle(`Stat cap for LB: ${lb}`);
 
-  if (lb < 13) {
+  if (lb < LOWEST_LB) {
     embed.setDescription("No cap values found");
   } else {
     embed.setThumbnail(
