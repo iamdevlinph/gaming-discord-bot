@@ -7,7 +7,7 @@ export const data = new SlashCommandBuilder()
   .addSubcommand((command) =>
     command
       .setName("cap")
-      .setDescription("Return DN SEA cap data")
+      .setDescription("Return DN SEA town stats cap data")
       .addStringOption((option) =>
         option
           .setName("lb")
