@@ -1,4 +1,4 @@
-import { LOWEST_LB } from "../constants";
+import { LOWEST_LB } from "../data/constants";
 import {
   CapAdditionalType,
   CapDefaultsSchema,
