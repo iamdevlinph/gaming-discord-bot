@@ -14,6 +14,14 @@ As of writing
 
 Based on [Creating your first Discord bot using TypeScript](https://dev.to/fellipeutaka/creating-your-first-discord-bot-using-typescript-1eh6)
 
+## Production
+
+No fancy stuff yet
+
+1. Go to [AWS](us-east-2.console.aws.amazon.com)
+2. Pull changes
+3. Reload `pm2` using
+
 ## Add to server
 
 Add bot to server by https://discord.com/oauth2/authorize?client_id=1177698138178470000

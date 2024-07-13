@@ -12,7 +12,7 @@
   "scripts": {
     "build": "tsup src/index.ts --minify",
     "dev": "tsx watch src/index.ts",
-    "start": "node dist/index.js"
+    "start": "npm run build; node dist/index.js"
   },
   "dependencies": {
     "discord.js": "14.15.3",
