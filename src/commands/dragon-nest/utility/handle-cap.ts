@@ -30,7 +30,7 @@ export const handleCap = (lb: number) => {
     const efmCapString = `${capCritEfm}%\n${capCritDmgEfm}%\n${capDefEfm}%\n${capFdEfm}%`;
 
     embed.addFields(
-      { name: "Stat", value: "Crit:\nCrit DMG:\nDef:\nFD:", inline: true },
+      { name: "Stat", value: "Crit:\ncDMG:\nDef:\nFD:", inline: true },
       { name: "Base Cap", value: baseCapString, inline: true },
       {
         name: "EFM Cap",
