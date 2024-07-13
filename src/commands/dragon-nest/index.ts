@@ -1,5 +1,5 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
-import { getCap } from "./utility/cap";
+import { handleCap } from "./utility/handle-cap";
 
 export const data = new SlashCommandBuilder()
   .setName("dn")
@@ -27,7 +27,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
   switch (subCommand) {
     case "cap": {
-      const reply = getCap(parseInt(lb));
+      const reply = handleCap(parseInt(lb));
       await interaction.reply({ ...reply, ephemeral: true });
     }
   }
