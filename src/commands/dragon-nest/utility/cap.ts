@@ -21,7 +21,8 @@ export const getCap = (lb: number) => {
     const def = handleLine("def", lb, capValue.capDef, capValue.capDefEfm);
     const fd = handleLine("fd", lb, capValue.capFd, capValue.capFdEfm);
 
-    let description = crit + critDmg + def + fd;
+    let description = "Dragon Nest __**town**__ stats cap\n\n";
+    description += crit + critDmg + def + fd;
 
     embed.setDescription(description);
   }
