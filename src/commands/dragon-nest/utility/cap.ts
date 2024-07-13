@@ -11,24 +11,54 @@ export const getCap = (lb: number) => {
   if (lb < 13) {
     embed.setDescription("No cap values found");
   } else {
-    const crit = `Crit: ${capValue.capCrit}%\n`;
-    const critDmg = `Crit Dmg: ${capValue.capCritDmg}%\n`;
-    const def = `Def: ${capValue.capDef}%\n`;
-    const fd = `FD: ${capValue.capFd}%\n`;
-
-    const efmSection = `\n**For EFM**\n`;
-    const efmCrit = `Crit: ${capValue.capCritEfm}%\n`;
-    const efmCritDmg = `Crit Dmg: ${capValue.capCritDmgEfm}%\n`;
-    const efmDef = `Def: ${capValue.capDefEfm}%\n`;
-    const efmFd = `FD: ${capValue.capFdEfm}%\n`;
+    const crit = handleLine("crit", lb, capValue.capCrit, capValue.capCritEfm);
+    const critDmg = handleLine(
+      "critDmg",
+      lb,
+      capValue.capCritDmg,
+      capValue.capCritDmgEfm
+    );
+    const def = handleLine("def", lb, capValue.capDef, capValue.capDefEfm);
+    const fd = handleLine("fd", lb, capValue.capFd, capValue.capFdEfm);
 
     let description = crit + critDmg + def + fd;
-    if (lb >= 18) {
-      description += efmSection + efmCrit + efmCritDmg + efmDef + efmFd;
-    }
 
     embed.setDescription(description);
   }
 
   return { embeds: [embed] };
 };
+
+function handleLine(
+  type: CapStatType,
+  lb: number,
+  baseCap: string,
+  efmCap: string
+) {
+  const mapping: { [key in CapStatType]: string } = {
+    crit: "Crit",
+    critDmg: "Crit Dmg",
+    def: "Def",
+    fd: "FD",
+  };
+
+  const numberOfSpace: { [key in CapStatType]: number } = {
+    crit: 5,
+    critDmg: 1,
+    def: 5,
+    fd: 5,
+  };
+
+  let string = `${mapping[type]}: ${baseCap}%`;
+
+  if (lb >= 18) {
+    // this is a U+2800 BRAILLE PATTERN BLANK
+    // from https://stackoverflow.com/a/59523326/4110257
+    string += `${"⠀".repeat(numberOfSpace[type])}`;
+    string += `- EFM: ${efmCap}%\n`;
+  } else {
+    string += "\n";
+  }
+
+  return string;
+}

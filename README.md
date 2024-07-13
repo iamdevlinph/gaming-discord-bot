@@ -20,7 +20,10 @@ No fancy stuff yet
 
 1. Go to [AWS](us-east-2.console.aws.amazon.com)
 2. Pull changes
-3. Reload `pm2` using
+3. Install packages if needed
+4. Run app by `pm2 start npm --name "gaming-bot" -- run start`
+5. Or build before reload
+6. Or reload by `pm2 reload gaming-bot`
 
 ## Add to server
 
