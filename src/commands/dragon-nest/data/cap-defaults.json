@@ -1,0 +1,49 @@
+{
+  "crit": {
+    "base": 843979,
+    "percentage": 90,
+    "increments": 100000,
+    "denominator": 937754.44,
+    "additional": {},
+    "debuff": {
+      "efm": 1000000
+    }
+  },
+  "critDmg": {
+    "base": 1348924,
+    "percentage": 300,
+    "increments": 450000,
+    "denominator": 1348924,
+    "additional": {
+      "base": {
+        "percentage": 200
+      },
+      "efm": {
+        "percentage": 195
+      }
+    },
+    "debuff": {
+      "efm": 4500000
+    }
+  },
+  "def": {
+    "base": 243214,
+    "percentage": 85,
+    "increments": 30000,
+    "denominator": 286134.11,
+    "additional": {},
+    "debuff": {
+      "efm": 300000
+    }
+  },
+  "fd": {
+    "base": 29888,
+    "percentage": 200,
+    "increments": 1200,
+    "denominator": 14944.1666666666,
+    "additional": {},
+    "debuff": {
+      "efm": 12000
+    }
+  }
+}
