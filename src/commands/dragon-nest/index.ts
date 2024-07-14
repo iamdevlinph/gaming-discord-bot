@@ -22,7 +22,10 @@ export async function execute(interaction: ChatInputCommandInteraction) {
   const lb = interaction.options.getString("lb");
 
   if (!lb || isNaN(lb as any)) {
-    return interaction.reply("Invalid LB provided. Must be a number.");
+    return interaction.reply({
+      content: "Invalid LB provided. Must be a number.",
+      ephemeral: true,
+    });
   }
 
   switch (subCommand) {
