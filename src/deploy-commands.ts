@@ -11,8 +11,8 @@ export async function deployCommands() {
   try {
     logger.info("Started refreshing application (/) commands.");
 
-    const commandsData = Object.values(commands)
-      .filter((command) => config.SKIP_COMMANDS.includes(command.data.name))
+    const globalCommands = Object.values(commands)
+      .filter((command) => !config.SKIP_COMMANDS.includes(command.data.name))
       .map((command) => command.data);
 
     /**
@@ -22,9 +22,25 @@ export async function deployCommands() {
     await config.REST.put(
       Routes.applicationCommands(config.DISCORD_CLIENT_ID),
       {
-        body: commandsData,
+        body: globalCommands,
       }
     );
+
+    const localCommands = Object.values(commands)
+      .filter((command) => config.SKIP_COMMANDS.includes(command.data.name))
+      .map((command) => command.data);
+
+    if (config.GUILD_ID) {
+      await config.REST.put(
+        Routes.applicationGuildCommands(
+          config.DISCORD_CLIENT_ID,
+          config.GUILD_ID
+        ),
+        {
+          body: localCommands,
+        }
+      );
+    }
 
     logger.success("Successfully reloaded application (/) commands.");
   } catch (error) {
@@ -36,6 +52,7 @@ export async function hotReloadCommands({ guildId }: DeployCommandsProps) {
   try {
     logger.info("Started HOT reloading application (/) commands.");
 
+    // deploy all commands for local development and own server
     const commandsData = Object.values(commands).map((command) => command.data);
 
     await config.REST.put(

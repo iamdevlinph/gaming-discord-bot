@@ -1,6 +1,9 @@
 import { EmbedBuilder } from "discord.js";
 import { calculateCap } from "./calculate-cap";
 import { LOWEST_LB } from "../data/constants";
+import * as fs from "fs";
+import logger from "node-color-log";
+import { toSentenceCase } from "common-utils-pkg";
 
 export const handleCap = (lb: number) => {
   const capValue = calculateCap(lb);
@@ -38,6 +41,22 @@ export const handleCap = (lb: number) => {
         inline: true,
       }
     );
+
+    let efmFile = process.cwd();
+    efmFile += "/src/commands/dragon-nest/efm/data/efm.json";
+    console.log("🍉 ~ handleCap ~ efmFile:", efmFile);
+    try {
+      const efmData: { debuff: string; ordeal: string } = JSON.parse(
+        fs.readFileSync(efmFile, "utf8")
+      );
+
+      embed.addFields({
+        name: "EFM Debuff",
+        value: toSentenceCase(efmData.debuff),
+      });
+    } catch (e) {
+      logger.error("Something went wrong with handling the EFM info in cap");
+    }
   }
 
   return { embeds: [embed] };
