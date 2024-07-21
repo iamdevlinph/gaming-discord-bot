@@ -12,7 +12,7 @@ export async function deployCommands() {
     logger.info("Started refreshing application (/) commands.");
 
     const globalCommands = Object.values(commands)
-      .filter((command) => !config.LOCAL_COMMANDS.includes(command.data.name))
+      .filter((command) => config.GLOBAL_COMMANDS.includes(command.data.name))
       .map((command) => command.data);
 
     /**

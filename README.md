@@ -40,6 +40,12 @@ Add bot to server by https://discord.com/oauth2/authorize?client_id=117769813817
 
 NOTE: The client id here is different from the testing one.
 
+## Commands
+
+- /dn
+  - cap
+- /ping
+
 ## Features
 
 Dragon Nest SEA
