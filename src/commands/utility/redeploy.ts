@@ -18,7 +18,6 @@ export async function execute(interaction: CommandInteraction) {
 
   const client = interaction.client;
   const guilds = client.guilds.cache.map((guild) => guild.id);
-  console.log("🍉 ~ execute ~ Guilds:", guilds);
 
   try {
     guilds.forEach(async (guildId) => {
@@ -26,7 +25,7 @@ export async function execute(interaction: CommandInteraction) {
       await hotReloadCommands({ guildId });
     });
   } catch (e) {
-    logger.error("Failed in redeploying to guild");
+    logger.error("Failed in redeploying to guild", e);
   }
 
   return interaction.reply({ content: "redeploy test", ephemeral: true });
