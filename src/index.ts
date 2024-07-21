@@ -18,7 +18,7 @@ client.once("ready", async () => {
 });
 
 client.on("guildCreate", async (guild) => {
-  await deployCommands();
+  await deployCommands({ guildId: guild.id });
 });
 
 client.on("interactionCreate", async (interaction) => {

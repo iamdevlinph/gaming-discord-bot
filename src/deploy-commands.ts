@@ -7,7 +7,7 @@ type DeployCommandsProps = {
   guildId: string;
 };
 
-export async function deployCommands() {
+export async function deployCommands({ guildId }: DeployCommandsProps) {
   try {
     logger.info("Started refreshing application (/) commands.");
 
@@ -20,12 +20,11 @@ export async function deployCommands() {
      * Source: https://discordjs.guide/creating-your-bot/command-deployment.html#global-commands
      */
     await config.REST.put(
-      Routes.applicationCommands(config.DISCORD_CLIENT_ID),
+      Routes.applicationGuildCommands(config.DISCORD_CLIENT_ID, guildId),
       {
         body: globalCommands,
       }
     );
-
     const localCommands = Object.values(commands)
       .filter((command) => config.LOCAL_COMMANDS.includes(command.data.name))
       .map((command) => command.data);
