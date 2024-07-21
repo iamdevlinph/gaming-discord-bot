@@ -14,6 +14,15 @@ As of writing
 
 Based on [Creating your first Discord bot using TypeScript](https://dev.to/fellipeutaka/creating-your-first-discord-bot-using-typescript-1eh6)
 
+#### ENV File
+
+| Name              | Required? | Description                                                      |
+| ----------------- | --------- | ---------------------------------------------------------------- |
+| DISCORD_TOKEN     | Yes       | Discord token                                                    |
+| DISCORD_CLIENT_ID | Yes       | Discord client id                                                |
+| ADMIN_IDS         | Yes       | Comma separated list of IDs with admin permissions               |
+| GUILD_ID          | No        | For testing, deploy to guild level is instant compared to global |
+
 ## Production
 
 No fancy stuff yet
@@ -30,3 +39,12 @@ No fancy stuff yet
 Add bot to server by https://discord.com/oauth2/authorize?client_id=1177698138178470000
 
 NOTE: The client id here is different from the testing one.
+
+## Features
+
+Dragon Nest SEA
+
+- [x] Town cap stats
+- [ ] Current EFM debuff
+- [ ] Current EFM ordeal
+- [ ] Nest lunar fragment info
