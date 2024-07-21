@@ -1,18 +1,24 @@
-import { Client } from "discord.js";
+import { ChatInputCommandInteraction, Client } from "discord.js";
 import { config } from "./config";
 import { commands } from "./commands";
-import { deployCommands } from "./deploy-commands";
+import { deployCommands, hotReloadCommands } from "./deploy-commands";
+import logger from "node-color-log";
 
 const client = new Client({
   intents: ["Guilds", "GuildMessages", "DirectMessages"],
 });
 
-client.once("ready", () => {
-  console.log("Discord bot is ready! 🤖");
+client.once("ready", async () => {
+  logger.success("Discord bot is ready! 🤖");
+
+  // do hot reload if GUILD_ID is provided
+  if (config.GUILD_ID) {
+    await hotReloadCommands({ guildId: config.GUILD_ID });
+  }
 });
 
 client.on("guildCreate", async (guild) => {
-  await deployCommands({ guildId: guild.id });
+  await deployCommands();
 });
 
 client.on("interactionCreate", async (interaction) => {
@@ -21,7 +27,9 @@ client.on("interactionCreate", async (interaction) => {
   }
   const { commandName } = interaction;
   if (commands[commandName as keyof typeof commands]) {
-    commands[commandName as keyof typeof commands].execute(interaction);
+    commands[commandName as keyof typeof commands].execute(
+      interaction as ChatInputCommandInteraction
+    );
   }
 });
 
