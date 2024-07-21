@@ -24,7 +24,7 @@ export async function execute(interaction: CommandInteraction) {
       // delete commands from guild first
       logger.info("Deleting commands from guild:", guildId);
       const guild = client.guilds.cache.get(guildId);
-      guild?.commands.set([]);
+      await guild?.commands.set([]);
 
       logger.info("Redeploying to guild:", guildId);
       await deployCommands({ guildId });

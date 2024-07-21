@@ -11,9 +11,11 @@ const client = new Client({
 client.once("ready", async () => {
   logger.success("Discord bot is ready! 🤖");
 
-  // hot reload if GUILD_ID is provided and when development
-  if (config.GUILD_ID && config.STAGE_ENV !== "development") {
-    await hotReloadCommands({ guildId: config.GUILD_ID });
+  // hot reload if DEVELOPER_GUILD_ID is provided and when development
+  if (config.DEVELOPER_GUILD_ID && config.STAGE_ENV !== "production") {
+    const guild = client.guilds.cache.get(config.DEVELOPER_GUILD_ID);
+    await guild?.commands.set([]);
+    await hotReloadCommands({ guildId: config.DEVELOPER_GUILD_ID });
   }
 });
 

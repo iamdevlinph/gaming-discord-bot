@@ -16,12 +16,12 @@ Based on [Creating your first Discord bot using TypeScript](https://dev.to/felli
 
 #### ENV File
 
-| Name              | Required? | Description                                        |
-| ----------------- | --------- | -------------------------------------------------- |
-| DISCORD_TOKEN     | Yes       | Discord token                                      |
-| DISCORD_CLIENT_ID | Yes       | Discord client id                                  |
-| ADMIN_IDS         | Yes       | Comma separated list of IDs with admin permissions |
-| GUILD_ID          | No        | Deploy commands for testing and developer          |
+| Name               | Required? | Description                                        |
+| ------------------ | --------- | -------------------------------------------------- |
+| DISCORD_TOKEN      | Yes       | Discord token                                      |
+| DISCORD_CLIENT_ID  | Yes       | Discord client id                                  |
+| ADMIN_IDS          | Yes       | Comma separated list of IDs with admin permissions |
+| DEVELOPER_GUILD_ID | No        | Deploy commands for testing and developer          |
 
 ## Production
 

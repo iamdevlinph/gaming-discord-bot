@@ -12,7 +12,7 @@ export async function deployCommands({ guildId }: DeployCommandsProps) {
     logger.info("Started refreshing application (/) commands.");
 
     const globalCommands = Object.values(commands)
-      .filter((command) => config.GLOBAL_COMMANDS.includes(command.data.name))
+      .filter((command) => config.PUBLIC_COMMANDS.includes(command.data.name))
       .map((command) => command.data);
 
     /**
@@ -25,15 +25,18 @@ export async function deployCommands({ guildId }: DeployCommandsProps) {
         body: globalCommands,
       }
     );
-    const localCommands = Object.values(commands)
-      .filter((command) => config.LOCAL_COMMANDS.includes(command.data.name))
-      .map((command) => command.data);
 
-    if (config.GUILD_ID) {
+    if (config.DEVELOPER_GUILD_ID) {
+      const localCommands = Object.values(commands)
+        .filter((command) =>
+          config.DEVELOPER_COMMANDS.includes(command.data.name)
+        )
+        .map((command) => command.data);
+
       await config.REST.put(
         Routes.applicationGuildCommands(
           config.DISCORD_CLIENT_ID,
-          config.GUILD_ID
+          config.DEVELOPER_GUILD_ID
         ),
         {
           body: localCommands,
