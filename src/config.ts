@@ -15,5 +15,5 @@ export const config = {
   ADMIN_IDS: ADMIN_IDS.replace(/ /g, "").split(","),
   GUILD_ID,
   REST: new REST({ version: "10" }).setToken(DISCORD_TOKEN),
-  SKIP_COMMANDS: ["redeploy"],
+  LOCAL_COMMANDS: ["redeploy"],
 };

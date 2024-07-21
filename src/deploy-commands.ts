@@ -12,7 +12,7 @@ export async function deployCommands() {
     logger.info("Started refreshing application (/) commands.");
 
     const globalCommands = Object.values(commands)
-      .filter((command) => !config.SKIP_COMMANDS.includes(command.data.name))
+      .filter((command) => !config.LOCAL_COMMANDS.includes(command.data.name))
       .map((command) => command.data);
 
     /**
@@ -27,7 +27,7 @@ export async function deployCommands() {
     );
 
     const localCommands = Object.values(commands)
-      .filter((command) => config.SKIP_COMMANDS.includes(command.data.name))
+      .filter((command) => config.LOCAL_COMMANDS.includes(command.data.name))
       .map((command) => command.data);
 
     if (config.GUILD_ID) {
