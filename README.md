@@ -16,12 +16,12 @@ Based on [Creating your first Discord bot using TypeScript](https://dev.to/felli
 
 #### ENV File
 
-| Name              | Required? | Description                                                      |
-| ----------------- | --------- | ---------------------------------------------------------------- |
-| DISCORD_TOKEN     | Yes       | Discord token                                                    |
-| DISCORD_CLIENT_ID | Yes       | Discord client id                                                |
-| ADMIN_IDS         | Yes       | Comma separated list of IDs with admin permissions               |
-| GUILD_ID          | No        | For testing, deploy to guild level is instant compared to global |
+| Name              | Required? | Description                                        |
+| ----------------- | --------- | -------------------------------------------------- |
+| DISCORD_TOKEN     | Yes       | Discord token                                      |
+| DISCORD_CLIENT_ID | Yes       | Discord client id                                  |
+| ADMIN_IDS         | Yes       | Comma separated list of IDs with admin permissions |
+| GUILD_ID          | No        | Deploy commands for testing and developer          |
 
 ## Production
 
@@ -45,6 +45,6 @@ NOTE: The client id here is different from the testing one.
 Dragon Nest SEA
 
 - [x] Town cap stats
-- [ ] Current EFM debuff
+- [x] Current EFM debuff
 - [ ] Current EFM ordeal
 - [ ] Nest lunar fragment info

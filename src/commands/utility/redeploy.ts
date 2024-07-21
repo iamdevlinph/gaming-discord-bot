@@ -21,6 +21,11 @@ export async function execute(interaction: CommandInteraction) {
 
   try {
     guilds.forEach(async (guildId) => {
+      // delete commands from guild first
+      logger.info("Deleting commands from guild:", guildId);
+      const guild = client.guilds.cache.get(guildId);
+      guild?.commands.set([]);
+
       logger.info("Redeploying to guild:", guildId);
       await hotReloadCommands({ guildId });
     });
@@ -28,5 +33,5 @@ export async function execute(interaction: CommandInteraction) {
     logger.error("Failed in redeploying to guild", e);
   }
 
-  return interaction.reply({ content: "redeploy test", ephemeral: true });
+  return interaction.reply({ content: "Redeploy completed", ephemeral: true });
 }
