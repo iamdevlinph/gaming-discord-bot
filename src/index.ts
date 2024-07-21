@@ -11,8 +11,8 @@ const client = new Client({
 client.once("ready", async () => {
   logger.success("Discord bot is ready! 🤖");
 
-  // do hot reload if GUILD_ID is provided
-  if (config.GUILD_ID) {
+  // hot reload if GUILD_ID is provided and when development
+  if (config.GUILD_ID && config.STAGE_ENV === "development") {
     await hotReloadCommands({ guildId: config.GUILD_ID });
   }
 });
