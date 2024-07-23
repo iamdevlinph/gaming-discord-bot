@@ -47,6 +47,7 @@ NOTE: The client id here is different from the testing one.
 - /genshin
   - version
 - /ping
+- /about
 
 ## Features
 
@@ -56,9 +57,10 @@ Dragon Nest SEA
 - [x] Current EFM debuff (in town cap stats)
 - [ ] Current EFM ordeal
 - [ ] Nest lunar fragment drop info `/dn nest lunar`
+- [ ] Mark nest/dungeon as done (nests, efm, etc...)
 
 Genshin Impact
 
 - [x] Current version
-- [ ] Mark spiral abyss as done
-- [ ] Mark imaginarium theater as done
+- [ ] Mark spiral abyss as done for the current period
+- [ ] Mark imaginarium theater as done for the current period
