@@ -11,6 +11,6 @@ export const cap = async (interaction: ChatInputCommandInteraction) => {
     });
   }
 
-  const reply = handleCap(parseInt(lb));
-  await interaction.reply({ ...reply, ephemeral: true });
+  const embeds = handleCap(parseInt(lb));
+  await interaction.reply({ embeds, ephemeral: true });
 };
