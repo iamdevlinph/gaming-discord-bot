@@ -1,22 +1,16 @@
 import { EmbedBuilder } from "discord.js";
 import { calculateCap } from "./calculate-cap";
 import { LOWEST_LB } from "../data/constants";
-import * as fs from "fs";
 import logger from "node-color-log";
+import { readFile } from "../../../utility/read-file";
 
 export const handleCap = (lb: number) => {
   const capValue = calculateCap(lb);
-  const embed = new EmbedBuilder()
-    .setColor("#5679EF")
-    .setTitle(`Stat cap for LB: ${lb}`);
+  const embed = new EmbedBuilder().setTitle(`Stat cap for LB: ${lb}`);
 
   if (lb < LOWEST_LB) {
     embed.setDescription("No cap values found");
   } else {
-    embed.setThumbnail(
-      "https://vectorified.com/images/dragon-nest-icon-30.png"
-    );
-
     const {
       capCrit,
       capCritDmg,
@@ -41,12 +35,10 @@ export const handleCap = (lb: number) => {
       }
     );
 
-    let efmFile = process.cwd();
-    efmFile += "/src/commands/dragon-nest/efm/data/efm.json";
-    console.log("🍉 ~ handleCap ~ efmFile:", efmFile);
     try {
+      const baseFilePath = "/src/commands/dn/efm/data/efm.json";
       const efmData: { debuff: string; ordeal: string } = JSON.parse(
-        fs.readFileSync(efmFile, "utf8")
+        readFile({ baseFilePath })
       );
 
       embed.addFields({
@@ -54,9 +46,15 @@ export const handleCap = (lb: number) => {
         value: efmData.debuff,
       });
     } catch (e) {
-      logger.error("Something went wrong with handling the EFM info in cap");
+      const errorMsg =
+        "Something went wrong when trying to calculate for cap stats.";
+      embed.addFields({
+        name: "Error",
+        value: errorMsg,
+      });
+      logger.error(errorMsg, e);
     }
   }
 
-  return { embeds: [embed] };
+  return embed;
 };

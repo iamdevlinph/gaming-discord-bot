@@ -50,7 +50,13 @@ NOTE: The client id here is different from the testing one.
 
 Dragon Nest SEA
 
-- [x] Town cap stats
-- [x] Current EFM debuff
+- [x] Town cap stats `/dn cap`
+- [x] Current EFM debuff (in town cap stats)
 - [ ] Current EFM ordeal
-- [ ] Nest lunar fragment info
+- [ ] Nest lunar fragment drop info `/dn nest lunar`
+
+Genshin Impact
+
+- [x] Current version
+- [ ] Mark spiral abyss as done
+- [ ] Mark imaginarium theater as done
