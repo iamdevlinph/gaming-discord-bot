@@ -28,7 +28,8 @@ const gameMapping: {
   },
   util: {
     color: "#BA0202",
-    thumbnail: "https://iam.devlin.ph/images/logo-no-margin.svg",
+    thumbnail:
+      "https://cdn.discordapp.com/app-icons/1177698138178470000/3f4ccbb669ed9ab75ac1ffe9d6a357fe.png",
   },
 };
 

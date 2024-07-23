@@ -19,18 +19,33 @@ export async function execute(interaction: CommandInteraction) {
   }
 
   const client = interaction.client;
-  const guilds = client.guilds.cache.map((guild) => guild.id);
-  console.log("🍉 ~ execute ~ guilds:", guilds);
-
-  const embeds = new EmbedBuilder().setTitle("Bot found in following servers:");
-
-  let guildstring: string = "";
-
-  guilds.forEach((guildId) => {
-    guildstring += `${guildId}\n`;
+  const guilds = client.guilds.cache.map(({ id, name, invites }) => {
+    return {
+      guildId: id,
+      name,
+    };
   });
 
-  embeds.setDescription(guildstring);
+  const embeds = new EmbedBuilder().setTitle(
+    "Bot found in the following servers:"
+  );
+
+  embeds.setDescription(printGuilds(guilds));
 
   return reply({ type: "util", interaction, embedContent: embeds });
+}
+
+function printGuilds(
+  guilds: {
+    guildId: string;
+    name: string;
+  }[]
+) {
+  let guildString = "";
+
+  guilds.forEach(({ name, guildId }, idx) => {
+    guildString += `${idx + 1}. ${name} (${guildId})`;
+  });
+
+  return guildString;
 }
