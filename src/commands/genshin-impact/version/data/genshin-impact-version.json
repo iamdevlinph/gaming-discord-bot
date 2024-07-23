@@ -1,0 +1,17 @@
+{
+  "2024-06-05": {
+    "version": "4.7",
+    "fromDate": "2024-06-05",
+    "patchDurationDays": 42
+  },
+  "2024-07-17": {
+    "version": "4.8",
+    "fromDate": "2024-07-17",
+    "patchDurationDays": 42
+  },
+  "2024-08-28": {
+    "version": "5.0",
+    "fromDate": "2024-08-28",
+    "patchDurationDays": 42
+  }
+}

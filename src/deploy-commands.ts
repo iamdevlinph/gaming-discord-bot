@@ -1,4 +1,8 @@
-import { Routes } from "discord.js";
+import {
+  Routes,
+  SlashCommandBuilder,
+  SlashCommandSubcommandsOnlyBuilder,
+} from "discord.js";
 import { config } from "./config";
 import { commands } from "./commands";
 import logger from "node-color-log";
@@ -26,8 +30,12 @@ export async function deployCommands({ guildId }: DeployCommandsProps) {
       }
     );
 
+    let localCommands: (
+      | SlashCommandBuilder
+      | SlashCommandSubcommandsOnlyBuilder
+    )[] = [];
     if (config.DEVELOPER_GUILD_ID) {
-      const localCommands = Object.values(commands)
+      localCommands = Object.values(commands)
         .filter((command) =>
           config.DEVELOPER_COMMANDS.includes(command.data.name)
         )
@@ -43,6 +51,10 @@ export async function deployCommands({ guildId }: DeployCommandsProps) {
         }
       );
     }
+    logger.info(
+      "Deploy commands\n",
+      [...globalCommands, ...localCommands].map((command) => command.name)
+    );
 
     logger.success("Successfully reloaded application (/) commands.");
   } catch (error) {
@@ -53,9 +65,15 @@ export async function deployCommands({ guildId }: DeployCommandsProps) {
 export async function hotReloadCommands({ guildId }: DeployCommandsProps) {
   try {
     logger.info("Started HOT reloading application (/) commands.");
+    logger.info("Guild ID", guildId);
 
     // deploy all commands for local development and own server
     const commandsData = Object.values(commands).map((command) => command.data);
+
+    logger.info(
+      "Hot reload commands:\n",
+      commandsData.map((command) => command.name)
+    );
 
     await config.REST.put(
       Routes.applicationGuildCommands(config.DISCORD_CLIENT_ID, guildId),

@@ -6,17 +6,11 @@ import { readFile } from "../../../utility/read-file";
 
 export const handleCap = (lb: number) => {
   const capValue = calculateCap(lb);
-  const embed = new EmbedBuilder()
-    .setColor("#5679EF")
-    .setTitle(`Stat cap for LB: ${lb}`);
+  const embed = new EmbedBuilder().setTitle(`Stat cap for LB: ${lb}`);
 
   if (lb < LOWEST_LB) {
     embed.setDescription("No cap values found");
   } else {
-    embed.setThumbnail(
-      "https://vectorified.com/images/dragon-nest-icon-30.png"
-    );
-
     const {
       capCrit,
       capCritDmg,
@@ -42,7 +36,7 @@ export const handleCap = (lb: number) => {
     );
 
     try {
-      const baseFilePath = "/src/commands/dragon-nest/efm/data/efm.json";
+      const baseFilePath = "/src/commands/dn/efm/data/efm.json";
       const efmData: { debuff: string; ordeal: string } = JSON.parse(
         readFile({ baseFilePath })
       );
@@ -62,5 +56,5 @@ export const handleCap = (lb: number) => {
     }
   }
 
-  return [embed];
+  return embed;
 };
