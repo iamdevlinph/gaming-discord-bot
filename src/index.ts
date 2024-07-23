@@ -38,7 +38,7 @@ client.once("ready", async () => {
 });
 
 client.on("guildCreate", async (guild) => {
-  logger.info("Guild create", guild);
+  logger.success("Guild create", guild.name);
   await deployCommands({ guildId: guild.id });
 });
 
