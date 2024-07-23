@@ -14,7 +14,7 @@ type ReplyType = {
   error?: Error;
 };
 
-const gameMapping: {
+const msgMapping: {
   [key in MessageType]: { color: ColorResolvable; thumbnail: string };
 } = {
   dn: {
@@ -29,7 +29,7 @@ const gameMapping: {
   util: {
     color: "#BA0202",
     thumbnail:
-      "https://cdn.discordapp.com/app-icons/1177698138178470000/3f4ccbb669ed9ab75ac1ffe9d6a357fe.png",
+      "https://cdn.discordapp.com/app-icons/1177698138178470000/a78b6209a6b61894c38a31c6af325036.png",
   },
 };
 
@@ -54,8 +54,8 @@ export const reply = ({ type, interaction, embedContent }: ReplyType) => {
     embed = embedContent as EmbedBuilder;
   }
 
-  embed.setColor(gameMapping[type].color);
-  embed.setThumbnail(gameMapping[type].thumbnail);
+  embed.setColor(msgMapping[type].color);
+  embed.setThumbnail(msgMapping[type].thumbnail);
 
   return interaction.reply({ embeds: [embed], ephemeral: true });
 };
