@@ -11,7 +11,7 @@ const client = new Client({
 client.once("ready", async () => {
   logger.success("Discord bot is ready! 🤖");
 
-  // await overwriteCommands();
+  await overwriteCommands();
 
   // hot reload if DEVELOPER_GUILD_ID is provided and when development
   if (config.DEVELOPER_GUILD_ID && config.STAGE_ENV !== "production") {
@@ -40,6 +40,7 @@ client.on("interactionCreate", async (interaction) => {
 client.login(config.DISCORD_TOKEN);
 
 async function overwriteCommands() {
+  logger.error("OVERWRITE COMMANDS");
   const guilds = client.guilds.cache.map((guild) => guild.id);
 
   guilds.forEach(async (guildId) => {

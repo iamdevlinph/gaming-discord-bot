@@ -15,32 +15,13 @@ export async function deployCommands({ guildId }: DeployCommandsProps) {
   try {
     logger.info("Started refreshing application (/) commands.");
 
-    const globalCommands = Object.values(commands)
-      .filter((command) => config.PUBLIC_COMMANDS.includes(command.data.name))
-      .map((command) => command.data);
+    // Deploy all commands for DEVELOPER server
+    if (config.DEVELOPER_GUILD_ID === guildId) {
+      const localCommands = Object.values(commands).map(
+        (command) => command.data
+      );
 
-    /**
-     * NOTE: `applicationCommands` to run in all servers
-     * Source: https://discordjs.guide/creating-your-bot/command-deployment.html#global-commands
-     */
-    await config.REST.put(
-      Routes.applicationGuildCommands(config.DISCORD_CLIENT_ID, guildId),
-      {
-        body: globalCommands,
-      }
-    );
-
-    let localCommands: (
-      | SlashCommandBuilder
-      | SlashCommandSubcommandsOnlyBuilder
-    )[] = [];
-    if (config.DEVELOPER_GUILD_ID) {
-      localCommands = Object.values(commands)
-        .filter((command) =>
-          config.DEVELOPER_COMMANDS.includes(command.data.name)
-        )
-        .map((command) => command.data);
-
+      logger.info("Setting developer commands");
       await config.REST.put(
         Routes.applicationGuildCommands(
           config.DISCORD_CLIENT_ID,
@@ -50,11 +31,34 @@ export async function deployCommands({ guildId }: DeployCommandsProps) {
           body: localCommands,
         }
       );
+
+      logger.success(
+        "Deploying commands\n",
+        localCommands.map((command) => command.name)
+      );
+    } else {
+      // only deploy global commands for other servers
+      const globalCommands = Object.values(commands)
+        .filter((command) => config.PUBLIC_COMMANDS.includes(command.data.name))
+        .map((command) => command.data);
+
+      /**
+       * NOTE: `applicationCommands` to run in all servers
+       * Source: https://discordjs.guide/creating-your-bot/command-deployment.html#global-commands
+       */
+      logger.info("Setting global commands");
+      await config.REST.put(
+        Routes.applicationGuildCommands(config.DISCORD_CLIENT_ID, guildId),
+        {
+          body: globalCommands,
+        }
+      );
+
+      logger.success(
+        "Deploying commands\n",
+        globalCommands.map((command) => command.name)
+      );
     }
-    logger.info(
-      "Deploy commands\n",
-      [...globalCommands, ...localCommands].map((command) => command.name)
-    );
 
     logger.success("Successfully reloaded application (/) commands.");
   } catch (error) {
