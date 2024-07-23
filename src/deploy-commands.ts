@@ -21,7 +21,7 @@ export async function deployCommands({ guildId }: DeployCommandsProps) {
         (command) => command.data
       );
 
-      logger.info("Setting developer commands");
+      logger.info("Setting developer commands:", guildId);
       await config.REST.put(
         Routes.applicationGuildCommands(
           config.DISCORD_CLIENT_ID,
@@ -46,7 +46,7 @@ export async function deployCommands({ guildId }: DeployCommandsProps) {
        * NOTE: `applicationCommands` to run in all servers
        * Source: https://discordjs.guide/creating-your-bot/command-deployment.html#global-commands
        */
-      logger.info("Setting global commands");
+      logger.info("Setting global commands:", guildId);
       await config.REST.put(
         Routes.applicationGuildCommands(config.DISCORD_CLIENT_ID, guildId),
         {
