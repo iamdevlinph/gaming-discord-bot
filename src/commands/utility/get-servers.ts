@@ -32,5 +32,5 @@ export async function execute(interaction: CommandInteraction) {
 
   embeds.setDescription(guildstring);
 
-  return reply({ game: "util", interaction, embedContent: embeds });
+  return reply({ type: "util", interaction, embedContent: embeds });
 }

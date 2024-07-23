@@ -7,12 +7,12 @@ export const cap = async (interaction: ChatInputCommandInteraction) => {
 
   if (!lb || isNaN(lb as any)) {
     return reply({
-      game: "dn",
+      type: "dn",
       interaction,
       embedContent: Error("Invalid LB provided. Must be a number."),
     });
   }
 
   const embeds = handleCap(parseInt(lb));
-  await reply({ game: "dn", interaction, embedContent: embeds });
+  await reply({ type: "dn", interaction, embedContent: embeds });
 };

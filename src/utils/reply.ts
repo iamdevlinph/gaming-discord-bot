@@ -5,17 +5,17 @@ import {
   EmbedBuilder,
 } from "discord.js";
 
-type GameTypes = "dn" | "genshin" | "util";
+type MessageType = "dn" | "genshin" | "util";
 
 type ReplyType = {
   interaction: ChatInputCommandInteraction | CommandInteraction;
-  game: GameTypes;
+  type: MessageType;
   embedContent?: EmbedBuilder | string | Error;
   error?: Error;
 };
 
 const gameMapping: {
-  [key in GameTypes]: { color: ColorResolvable; thumbnail: string };
+  [key in MessageType]: { color: ColorResolvable; thumbnail: string };
 } = {
   dn: {
     color: "#846B31",
@@ -37,7 +37,7 @@ const gameMapping: {
  * This can accept an EmbedBuilder object
  * or a simple string then it will be converted to an EmbedBuilder
  */
-export const reply = ({ game, interaction, embedContent }: ReplyType) => {
+export const reply = ({ type, interaction, embedContent }: ReplyType) => {
   let embed: EmbedBuilder;
 
   if (typeof embedContent === "string" || embedContent instanceof Error) {
@@ -53,8 +53,8 @@ export const reply = ({ game, interaction, embedContent }: ReplyType) => {
     embed = embedContent as EmbedBuilder;
   }
 
-  embed.setColor(gameMapping[game].color);
-  embed.setThumbnail(gameMapping[game].thumbnail);
+  embed.setColor(gameMapping[type].color);
+  embed.setThumbnail(gameMapping[type].thumbnail);
 
   return interaction.reply({ embeds: [embed], ephemeral: true });
 };

@@ -22,12 +22,12 @@ export const version = async (interaction: ChatInputCommandInteraction) => {
       value: currentVersion,
     });
 
-    reply({ game: "genshin", interaction, embedContent: embed });
+    reply({ type: "genshin", interaction, embedContent: embed });
   } catch (e) {
     const errorMsg =
       "Something went wrong with getting Genshin Impact version.";
 
-    reply({ game: "genshin", interaction, embedContent: new Error(errorMsg) });
+    reply({ type: "genshin", interaction, embedContent: new Error(errorMsg) });
     logger.error("genshin version", errorMsg, e);
   }
 };
