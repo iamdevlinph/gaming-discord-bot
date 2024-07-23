@@ -1,7 +1,8 @@
-import { CommandInteraction, SlashCommandBuilder } from "discord.js";
+import { CommandInteraction, Routes, SlashCommandBuilder } from "discord.js";
 import { isAdmin, accessError } from "../../utils";
 import { deployCommands, hotReloadCommands } from "../../deploy-commands";
 import logger from "node-color-log";
+import { config } from "../../config";
 
 export const isGlobal = false;
 
@@ -23,10 +24,14 @@ export async function execute(interaction: CommandInteraction) {
     guilds.forEach(async (guildId) => {
       // delete commands from guild first
       logger.info("Deleting commands from guild:", guildId);
-      const guild = client.guilds.cache.get(guildId);
-      await guild?.commands.set([]);
+      await config.REST.put(
+        Routes.applicationGuildCommands(config.DISCORD_CLIENT_ID, guildId),
+        {
+          body: [],
+        }
+      );
 
-      logger.info("Redeploying to guild:", guildId);
+      logger.info("Redeploying commands for guild", guildId);
       await deployCommands({ guildId });
     });
   } catch (e) {

@@ -21,7 +21,7 @@ export const config = {
   ADMIN_IDS: ADMIN_IDS.replace(/ /g, "").split(","),
   DEVELOPER_GUILD_ID,
   REST: new REST({ version: "10" }).setToken(DISCORD_TOKEN),
-  PUBLIC_COMMANDS: ["dn", "cap", "genshin"],
+  PUBLIC_COMMANDS: ["dn", "genshin", "ping"],
   DEVELOPER_COMMANDS: ["redeploy"],
   STAGE_ENV,
 };
