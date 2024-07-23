@@ -1,13 +1,14 @@
 import {
   ChatInputCommandInteraction,
   ColorResolvable,
+  CommandInteraction,
   EmbedBuilder,
 } from "discord.js";
 
-type GameTypes = "dn" | "genshin";
+type GameTypes = "dn" | "genshin" | "util";
 
 type ReplyType = {
-  interaction: ChatInputCommandInteraction;
+  interaction: ChatInputCommandInteraction | CommandInteraction;
   game: GameTypes;
   embedContent?: EmbedBuilder | string | Error;
   error?: Error;
@@ -24,6 +25,10 @@ const gameMapping: {
     color: "#1768B3",
     thumbnail:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAPHpfe_BWDsR7RJ0DLCcrGrc3Mu6tBWprhQ&s",
+  },
+  util: {
+    color: "#BA0202",
+    thumbnail: "https://iam.devlin.ph/images/logo-no-margin.svg",
   },
 };
 

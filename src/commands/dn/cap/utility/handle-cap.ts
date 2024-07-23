@@ -52,7 +52,7 @@ export const handleCap = (lb: number) => {
         name: "Error",
         value: errorMsg,
       });
-      logger.error(errorMsg, e);
+      logger.error("handleCap", errorMsg, e);
     }
   }
 

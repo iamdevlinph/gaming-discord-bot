@@ -22,6 +22,6 @@ export const config = {
   DEVELOPER_GUILD_ID,
   REST: new REST({ version: "10" }).setToken(DISCORD_TOKEN),
   PUBLIC_COMMANDS: ["dn", "genshin", "ping"],
-  DEVELOPER_COMMANDS: ["redeploy"],
+  DEVELOPER_COMMANDS: ["redeploy", "get-servers"],
   STAGE_ENV,
 };

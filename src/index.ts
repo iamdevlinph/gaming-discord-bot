@@ -11,17 +11,34 @@ const client = new Client({
 client.once("ready", async () => {
   logger.success("Discord bot is ready! 🤖");
 
+  // const gc = await config.REST.get(
+  //   Routes.applicationGuildCommands(
+  //     config.DISCORD_CLIENT_ID,
+  //     "723382361596756070"
+  //   )
+  // );
+  // console.log("gc", gc);
+
+  // const lc = await config.REST.get(
+  //   Routes.applicationGuildCommands(
+  //     config.DISCORD_CLIENT_ID,
+  //     "723382361596756070"
+  //   )
+  // );
+  // console.log("lc", lc);
+
   // await overwriteCommands();
 
   // hot reload if DEVELOPER_GUILD_ID is provided and when development
-  if (config.DEVELOPER_GUILD_ID && config.STAGE_ENV !== "production") {
-    const guild = client.guilds.cache.get(config.DEVELOPER_GUILD_ID);
-    await guild?.commands.set([]);
-    await hotReloadCommands({ guildId: config.DEVELOPER_GUILD_ID });
-  }
+  // if (config.DEVELOPER_GUILD_ID && config.STAGE_ENV !== "production") {
+  //   const guild = client.guilds.cache.get(config.DEVELOPER_GUILD_ID);
+  //   await guild?.commands.set([]);
+  //   await hotReloadCommands({ guildId: config.DEVELOPER_GUILD_ID });
+  // }
 });
 
 client.on("guildCreate", async (guild) => {
+  logger.info("Guild create", guild);
   await deployCommands({ guildId: guild.id });
 });
 
@@ -43,7 +60,12 @@ async function overwriteCommands() {
   logger.error("OVERWRITE COMMANDS");
   const guilds = client.guilds.cache.map((guild) => guild.id);
 
+  if (guilds.length === 0) {
+    return logger.info("No guilds to overwrite commands with");
+  }
+
   guilds.forEach(async (guildId) => {
+    logger.error("OVERWRITE COMMANDS - START", guildId);
     await config.REST.put(
       Routes.applicationGuildCommands(config.DISCORD_CLIENT_ID, guildId),
       {
@@ -51,6 +73,10 @@ async function overwriteCommands() {
       }
     );
 
+    logger.error("OVERWRITE COMMANDS - DONE DELETE", guildId);
+
     await deployCommands({ guildId });
+
+    logger.error("OVERWRITE COMMANDS - DEPLOYED", guildId);
   });
 }

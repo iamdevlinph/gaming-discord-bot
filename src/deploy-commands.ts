@@ -13,7 +13,7 @@ type DeployCommandsProps = {
 
 export async function deployCommands({ guildId }: DeployCommandsProps) {
   try {
-    logger.info("Started refreshing application (/) commands.");
+    logger.info("Deploying commands", guildId);
 
     // Deploy all commands for DEVELOPER server
     if (config.DEVELOPER_GUILD_ID === guildId) {
@@ -33,7 +33,7 @@ export async function deployCommands({ guildId }: DeployCommandsProps) {
       );
 
       logger.success(
-        "Deploying commands\n",
+        "Deployed developer commands\n",
         localCommands.map((command) => command.name)
       );
     } else {
@@ -55,20 +55,29 @@ export async function deployCommands({ guildId }: DeployCommandsProps) {
       );
 
       logger.success(
-        "Deploying commands\n",
+        "Deployed global commands\n",
         globalCommands.map((command) => command.name)
       );
     }
 
-    logger.success("Successfully reloaded application (/) commands.");
+    logger.success("Successfully deployed commands", guildId);
   } catch (error) {
-    logger.error(error);
+    logger.error("deployCommands", error);
   }
 }
 
 export async function hotReloadCommands({ guildId }: DeployCommandsProps) {
   try {
     logger.info("Started HOT reloading application (/) commands.");
+
+    // logger.info("Deleting commands");
+    // await config.REST.put(
+    //   Routes.applicationGuildCommands(config.DISCORD_CLIENT_ID, guildId),
+    //   {
+    //     body: [],
+    //   }
+    // );
+
     logger.info("Guild ID", guildId);
 
     // deploy all commands for local development and own server
@@ -88,6 +97,6 @@ export async function hotReloadCommands({ guildId }: DeployCommandsProps) {
 
     logger.success("Successfully HOT reloaded application (/) commands.");
   } catch (error) {
-    logger.error(error);
+    logger.error("hot reload", error);
   }
 }

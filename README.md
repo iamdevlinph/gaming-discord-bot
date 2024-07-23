@@ -10,7 +10,7 @@ As of writing
 1. `yarn install`
 2. `yarn run dev` to run
 3. Secure `DISCORD_TOKEN`
-4. Add bot to server by https://discord.com/oauth2/authorize?client_id=1261592303068385402
+4. Add bot to server by https://discord.com/oauth2/authorize?client_id=1261592303068385402&permissions=2048&integration_type=0&scope=applications.commands+bot
 
 Based on [Creating your first Discord bot using TypeScript](https://dev.to/fellipeutaka/creating-your-first-discord-bot-using-typescript-1eh6)
 
@@ -36,7 +36,7 @@ No fancy stuff yet
 
 ## Add to server
 
-Add bot to server by https://discord.com/oauth2/authorize?client_id=1177698138178470000
+Add bot to server by https://discord.com/oauth2/authorize?client_id=1177698138178470000&permissions=2048&integration_type=0&scope=applications.commands+bot
 
 NOTE: The client id here is different from the testing one.
 
@@ -44,6 +44,8 @@ NOTE: The client id here is different from the testing one.
 
 - /dn
   - cap
+- /genshin
+  - version
 - /ping
 
 ## Features
