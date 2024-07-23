@@ -1,4 +1,4 @@
-import { ChatInputCommandInteraction, Client } from "discord.js";
+import { ChatInputCommandInteraction, Client, Routes } from "discord.js";
 import { config } from "./config";
 import { commands } from "./commands";
 import { deployCommands, hotReloadCommands } from "./deploy-commands";
@@ -10,6 +10,8 @@ const client = new Client({
 
 client.once("ready", async () => {
   logger.success("Discord bot is ready! 🤖");
+
+  // await overwriteCommands();
 
   // hot reload if DEVELOPER_GUILD_ID is provided and when development
   if (config.DEVELOPER_GUILD_ID && config.STAGE_ENV !== "production") {
@@ -36,3 +38,18 @@ client.on("interactionCreate", async (interaction) => {
 });
 
 client.login(config.DISCORD_TOKEN);
+
+async function overwriteCommands() {
+  const guilds = client.guilds.cache.map((guild) => guild.id);
+
+  guilds.forEach(async (guildId) => {
+    await config.REST.put(
+      Routes.applicationGuildCommands(config.DISCORD_CLIENT_ID, guildId),
+      {
+        body: [],
+      }
+    );
+
+    await deployCommands({ guildId });
+  });
+}
