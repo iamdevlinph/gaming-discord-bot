@@ -2,7 +2,8 @@ import { EmbedBuilder } from "discord.js";
 import { calculateCap } from "./calculate-cap";
 import { LOWEST_LB } from "../data/constants";
 import logger from "node-color-log";
-import { readFile } from "@utils/read-file";
+import { readFile } from "@utils";
+import { EfmJsonSchema } from "../../efm/data/efm-schema";
 
 export const handleCap = (lb: number) => {
   const capValue = calculateCap(lb);
@@ -37,14 +38,18 @@ export const handleCap = (lb: number) => {
 
     try {
       const baseFilePath = "/src/commands/dn/efm/data/efm.json";
-      const efmData: { debuff: string; ordeal: string } = JSON.parse(
-        readFile({ baseFilePath })
-      );
+      const efmData: EfmJsonSchema = JSON.parse(readFile({ baseFilePath }));
 
-      embed.addFields({
-        name: "EFM Debuff",
-        value: efmData.debuff,
-      });
+      embed.addFields(
+        {
+          name: "EFM Debuff",
+          value: efmData.data.debuff,
+        },
+        {
+          name: "EFM Ordeal",
+          value: efmData.data.ordeal,
+        }
+      );
     } catch (e) {
       const errorMsg =
         "Something went wrong when trying to calculate for cap stats.";

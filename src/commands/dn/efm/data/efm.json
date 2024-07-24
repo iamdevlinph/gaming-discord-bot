@@ -1,4 +1,33 @@
 {
-  "debuff": "Critical",
-  "ordeal": "silence"
+  "debuffs": [
+    {
+      "debuff": "Anxiety",
+      "destiny": "Stable",
+      "penalty": "1,000,000 Crit"
+    },
+    {
+      "debuff": "Compulsion",
+      "destiny": "Relaxed",
+      "penalty": "4,500,000 Crit DMG"
+    },
+    {
+      "debuff": "Depression",
+      "destiny": "Cheerful",
+      "penalty": "300,000 Def"
+    },
+    {
+      "debuff": "Despair",
+      "destiny": "Dependable",
+      "penalty": "300,000 mDef"
+    },
+    {
+      "debuff": "Doubt",
+      "destiny": "Reliable",
+      "penalty": "12,000 FD"
+    }
+  ],
+  "data": {
+    "debuff": "Anxiety",
+    "ordeal": "Silence"
+  }
 }

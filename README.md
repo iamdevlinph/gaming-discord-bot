@@ -46,6 +46,8 @@ NOTE: The client id here is different from the testing one.
   - cap
   - armor
     - drop - armor fragments location
+  - efm
+    - debuffs - list efm debuffs and related destiny immunity
 - /genshin
   - version
 - /ping
