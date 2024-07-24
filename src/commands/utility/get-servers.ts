@@ -46,7 +46,7 @@ function printGuilds(
   let guildString = "";
 
   guilds.forEach(({ name, guildId }, idx) => {
-    guildString += `${idx + 1}. ${name} (${guildId})`;
+    guildString += `${idx + 1}. ${name} (${guildId})\n`;
   });
 
   return guildString;
