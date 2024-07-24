@@ -3,7 +3,7 @@ import {
   SlashCommandSubcommandBuilder,
 } from "discord.js";
 import { armorDrop } from "./armor-drop/armor-drop";
-import { reply } from "@utils/reply";
+import { reply } from "@utils";
 
 const ARMOR_CATEGORY = "armor_category";
 

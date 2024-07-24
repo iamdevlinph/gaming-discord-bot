@@ -3,7 +3,7 @@ import {
   SlashCommandSubcommandBuilder,
 } from "discord.js";
 import { handleCap } from "./utility/handle-cap";
-import { reply } from "@utils/reply";
+import { reply } from "@utils";
 
 export const capCommand = (command: SlashCommandSubcommandBuilder) => {
   return command

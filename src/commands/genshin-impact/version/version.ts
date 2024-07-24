@@ -4,8 +4,7 @@ import {
   findGenshinVersion,
   GenshinVersionObject,
 } from "./utility/find-genshin-version";
-import { readFile } from "@utils/read-file";
-import { reply } from "@utils/reply";
+import { readFile, reply } from "@utils";
 
 export const version = async (interaction: ChatInputCommandInteraction) => {
   try {

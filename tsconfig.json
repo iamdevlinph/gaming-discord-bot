@@ -14,7 +14,7 @@
     "typeRoots": ["src/commands/dn/cap/data/cap-defaults.d.ts"],
     "baseUrl": "./src",
     "paths": {
-      "@utils/*": ["utils/*"]
+      "@utils": ["utils"]
     }
   }
 }

@@ -2,8 +2,7 @@ import { CommandInteraction, Routes, SlashCommandBuilder } from "discord.js";
 import { deployCommands, hotReloadCommands } from "../../deploy-commands";
 import logger from "node-color-log";
 import { config } from "../../config";
-import { isAdmin } from "@utils/is-admin";
-import { accessError } from "@utils/access-error";
+import { accessError, isAdmin } from "@utils";
 
 export const isGlobal = false;
 

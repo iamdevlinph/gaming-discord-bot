@@ -1,4 +1,4 @@
-import { reply } from "@utils/reply";
+import { reply } from "@utils";
 import {
   APIEmbedField,
   ChatInputCommandInteraction,

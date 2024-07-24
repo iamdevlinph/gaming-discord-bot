@@ -1,6 +1,4 @@
-import { accessError } from "@utils/access-error";
-import { isAdmin } from "@utils/is-admin";
-import { reply } from "@utils/reply";
+import { accessError, isAdmin, reply } from "@utils";
 import {
   CommandInteraction,
   EmbedBuilder,
