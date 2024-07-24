@@ -12,23 +12,23 @@ export const armorDrop = (interaction: ChatInputCommandInteraction) => {
 
   const partsLocation = [
     {
-      part: "helmet",
+      part: "🧢 helmet",
       location: "anu arendel",
     },
     {
-      part: "upper",
+      part: "👕 upper",
       location: "red lotus\nrhadmes",
     },
     {
-      part: "lower",
+      part: "👖 lower",
       location: "merca's heart\nmerca's port",
     },
     {
-      part: "gloves",
+      part: "🥊gloves",
       location: "riverwort wharf",
     },
     {
-      part: "shoes",
+      part: "👢shoes",
       location: "hermalte port\nfoothills of black mountain",
     },
   ];
