@@ -15,7 +15,7 @@ export const data = new SlashCommandBuilder()
 
 export async function execute(interaction: CommandInteraction) {
   const userId = interaction.user.id;
-  if (!isAdminmin(interaction.user.id)) {
+  if (!isAdmin(interaction.user.id)) {
     accessError({ command: "redeploy", userId });
     return interaction.reply({ content: "Not allowed", ephemeral: true });
   }

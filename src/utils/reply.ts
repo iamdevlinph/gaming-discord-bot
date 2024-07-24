@@ -12,6 +12,7 @@ type ReplyType = {
   type: MessageType;
   embedContent?: EmbedBuilder | string | Error;
   error?: Error;
+  persist?: boolean;
 };
 
 const msgMapping: {
@@ -38,7 +39,12 @@ const msgMapping: {
  * This can accept an EmbedBuilder object
  * or a simple string then it will be converted to an EmbedBuilder
  */
-export const reply = ({ type, interaction, embedContent }: ReplyType) => {
+export const reply = ({
+  type,
+  interaction,
+  embedContent,
+  persist = false,
+}: ReplyType) => {
   let embed: EmbedBuilder;
 
   if (typeof embedContent === "string" || embedContent instanceof Error) {
@@ -57,5 +63,5 @@ export const reply = ({ type, interaction, embedContent }: ReplyType) => {
   embed.setColor(msgMapping[type].color);
   embed.setThumbnail(msgMapping[type].thumbnail);
 
-  return interaction.reply({ embeds: [embed], ephemeral: true });
+  return interaction.reply({ embeds: [embed], ephemeral: !persist });
 };
