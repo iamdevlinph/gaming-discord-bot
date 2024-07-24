@@ -32,7 +32,7 @@ export async function deployCommands({ guildId }: DeployCommandsProps) {
         }
       );
 
-      logger.success(
+      logger.info(
         "Deployed developer commands\n",
         localCommands.map((command) => command.name)
       );
@@ -54,7 +54,7 @@ export async function deployCommands({ guildId }: DeployCommandsProps) {
         }
       );
 
-      logger.success(
+      logger.info(
         "Deployed global commands\n",
         globalCommands.map((command) => command.name)
       );
