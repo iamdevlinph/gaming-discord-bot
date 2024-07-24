@@ -36,7 +36,6 @@ export const armor = async (interaction: ChatInputCommandInteraction) => {
   const selectedChoice = interaction.options.getString(
     ARMOR_CATEGORY
   ) as ArmorCategory["value"];
-  console.log("🍉 ~ armor ~ selectedChoice:", selectedChoice);
 
   switch (selectedChoice) {
     case "armor_drop":
