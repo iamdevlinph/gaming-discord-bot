@@ -50,6 +50,13 @@ export const handleCap = (lb: number) => {
           value: efmData.data.ordeal,
         }
       );
+
+      const delimeter = " ";
+      embed.addFields({
+        name: "One line",
+        value: `Crit:${capCrit}%${delimeter}cDmg:${capCritDmg}%${delimeter}Def:${capDef}%${delimeter}FD:${capFd}%`,
+        inline: true,
+      });
     } catch (e) {
       const errorMsg =
         "Something went wrong when trying to calculate for cap stats.";
