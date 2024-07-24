@@ -44,6 +44,8 @@ NOTE: The client id here is different from the testing one.
 
 - /dn
   - cap
+  - armor
+    - drop - armor fragments location
 - /genshin
   - version
 - /ping
@@ -54,6 +56,7 @@ NOTE: The client id here is different from the testing one.
 Dragon Nest SEA
 
 - [x] Town cap stats `/dn cap`
+- [ ] Armor fragment drops
 - [x] Current EFM debuff (in town cap stats)
 - [ ] Current EFM ordeal
 - [ ] Nest lunar fragment drop info `/dn nest lunar`

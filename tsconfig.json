@@ -11,6 +11,10 @@
     "strict": true,
     "strictNullChecks": true,
     "skipLibCheck": true,
-    "typeRoots": ["src/commands/dn/cap/data/cap-defaults.d.ts"]
+    "typeRoots": ["src/commands/dn/cap/data/cap-defaults.d.ts"],
+    "baseUrl": "./src",
+    "paths": {
+      "@utils/*": ["utils/*"]
+    }
   }
 }

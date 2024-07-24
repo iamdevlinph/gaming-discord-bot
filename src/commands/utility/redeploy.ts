@@ -1,8 +1,9 @@
 import { CommandInteraction, Routes, SlashCommandBuilder } from "discord.js";
-import { isAdmin, accessError } from "../../utils";
 import { deployCommands, hotReloadCommands } from "../../deploy-commands";
 import logger from "node-color-log";
 import { config } from "../../config";
+import { isAdmin } from "@utils/is-admin";
+import { accessError } from "@utils/access-error";
 
 export const isGlobal = false;
 
@@ -38,5 +39,8 @@ export async function execute(interaction: CommandInteraction) {
     logger.error("Failed in redeploying to guild", e);
   }
 
-  return interaction.reply({ content: "Redeploy completed", ephemeral: true });
+  return interaction.reply({
+    content: "Redeploy has started",
+    ephemeral: true,
+  });
 }

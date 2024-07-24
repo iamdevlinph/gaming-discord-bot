@@ -1,11 +1,11 @@
 import { ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
 import logger from "node-color-log";
-import { readFile } from "../../utility/read-file";
 import {
   findGenshinVersion,
   GenshinVersionObject,
 } from "./utility/find-genshin-version";
-import { reply } from "../../../utils";
+import { readFile } from "@utils/read-file";
+import { reply } from "@utils/reply";
 
 export const version = async (interaction: ChatInputCommandInteraction) => {
   try {

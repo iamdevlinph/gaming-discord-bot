@@ -2,7 +2,7 @@ import { EmbedBuilder } from "discord.js";
 import { calculateCap } from "./calculate-cap";
 import { LOWEST_LB } from "../data/constants";
 import logger from "node-color-log";
-import { readFile } from "../../../utility/read-file";
+import { readFile } from "@utils/read-file";
 
 export const handleCap = (lb: number) => {
   const capValue = calculateCap(lb);

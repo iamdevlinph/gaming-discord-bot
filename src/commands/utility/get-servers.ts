@@ -1,9 +1,11 @@
+import { accessError } from "@utils/access-error";
+import { isAdmin } from "@utils/is-admin";
+import { reply } from "@utils/reply";
 import {
   CommandInteraction,
   EmbedBuilder,
   SlashCommandBuilder,
 } from "discord.js";
-import { isAdmin, accessError, reply } from "../../utils";
 
 export const isGlobal = false;
 
@@ -13,7 +15,7 @@ export const data = new SlashCommandBuilder()
 
 export async function execute(interaction: CommandInteraction) {
   const userId = interaction.user.id;
-  if (!isAdmin(interaction.user.id)) {
+  if (!isAdminmin(interaction.user.id)) {
     accessError({ command: "redeploy", userId });
     return interaction.reply({ content: "Not allowed", ephemeral: true });
   }

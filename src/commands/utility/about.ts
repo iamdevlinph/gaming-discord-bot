@@ -1,9 +1,9 @@
+import { reply } from "@utils/reply";
 import {
   CommandInteraction,
   EmbedBuilder,
   SlashCommandBuilder,
 } from "discord.js";
-import { reply } from "../../utils";
 
 export const data = new SlashCommandBuilder()
   .setName("about")
