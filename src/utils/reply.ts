@@ -1,11 +1,13 @@
 import {
+  AttachmentBuilder,
   ChatInputCommandInteraction,
   ColorResolvable,
   CommandInteraction,
   EmbedBuilder,
 } from "discord.js";
+import logger from "node-color-log";
 
-type MessageType = "dn" | "genshin" | "util";
+type MessageType = "dn" | "genshin" | "valorant" | "util";
 
 type ReplyType = {
   interaction: ChatInputCommandInteraction | CommandInteraction;
@@ -15,22 +17,29 @@ type ReplyType = {
   persist?: boolean;
 };
 
+const UTILS_IMG_PATH = "src/utils/img";
+
 const msgMapping: {
-  [key in MessageType]: { color: ColorResolvable; thumbnail: string };
+  [key in MessageType]: {
+    color: ColorResolvable;
+    fileName: string;
+  };
 } = {
   dn: {
     color: "#846B31",
-    thumbnail: "https://vectorified.com/images/dragon-nest-icon-30.png",
+    fileName: "dn.png",
   },
   genshin: {
     color: "#1768B3",
-    thumbnail:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAPHpfe_BWDsR7RJ0DLCcrGrc3Mu6tBWprhQ&s",
+    fileName: "genshin.jpg",
+  },
+  valorant: {
+    color: "#D83946",
+    fileName: "valorant.png",
   },
   util: {
     color: "#BA0202",
-    thumbnail:
-      "https://cdn.discordapp.com/app-icons/1177698138178470000/a78b6209a6b61894c38a31c6af325036.png",
+    fileName: "gaming-bot.png",
   },
 };
 
@@ -46,6 +55,9 @@ export const reply = ({
   persist = false,
 }: ReplyType) => {
   let embed: EmbedBuilder;
+  const thumbnail = new AttachmentBuilder(
+    `${UTILS_IMG_PATH}/${msgMapping[type].fileName}`
+  );
 
   if (typeof embedContent === "string" || embedContent instanceof Error) {
     const isError = embedContent instanceof Error;
@@ -61,7 +73,11 @@ export const reply = ({
   }
 
   embed.setColor(msgMapping[type].color);
-  embed.setThumbnail(msgMapping[type].thumbnail);
+  embed.setThumbnail(`attachment://${msgMapping[type].fileName}`);
 
-  return interaction.reply({ embeds: [embed], ephemeral: !persist });
+  return interaction.reply({
+    embeds: [embed],
+    ephemeral: !persist,
+    files: [thumbnail],
+  });
 };

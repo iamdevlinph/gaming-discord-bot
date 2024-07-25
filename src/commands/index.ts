@@ -5,6 +5,7 @@ import * as about from "./utility/about";
 
 import * as dn from "./dn";
 import * as genshin from "./genshin-impact";
+import * as valorant from "./valorant";
 
 /**
  * NOTE: Exported command should match the
@@ -13,9 +14,10 @@ import * as genshin from "./genshin-impact";
 export const commands = {
   redeploy,
   "get-servers": getServers,
+  about,
 
   dn,
   genshin,
+  valorant,
   ping,
-  about,
 };

@@ -50,6 +50,8 @@ NOTE: The client id here is different from the testing one.
     - debuffs - list efm debuffs and related destiny immunity
 - /genshin
   - version
+- /valorant
+  - buy_vp - returns how much currency needed to buy valorant points
 - /ping
 - /about
 

@@ -1,19 +1,17 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
-import { version } from "./version/version";
+import { buyVp, buyVpCommand } from "./buy-vp/buy-vp";
 
 export const data = new SlashCommandBuilder()
-  .setName("genshin")
-  .setDescription("Genshin Impact commands")
-  .addSubcommand((command) =>
-    command.setName("version").setDescription("Returns current game version")
-  );
+  .setName("valorant")
+  .setDescription("Valorant commands")
+  .addSubcommand((command) => buyVpCommand(command));
 
 export async function execute(interaction: ChatInputCommandInteraction) {
   const subCommand = interaction.options.getSubcommand();
 
   switch (subCommand) {
-    case "version": {
-      version(interaction);
+    case "buy_vp": {
+      buyVp(interaction);
       break;
     }
   }

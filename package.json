@@ -15,9 +15,9 @@
     "start": "npm run build; node dist/index.js"
   },
   "dependencies": {
+    "array.prototype.toreversed": "1.1.2",
     "discord.js": "14.15.3",
-    "dotenv": "16.4.5",
-    "zod": "^3.23.8"
+    "dotenv": "16.4.5"
   },
   "devDependencies": {
     "node-color-log": "12.0.1",
