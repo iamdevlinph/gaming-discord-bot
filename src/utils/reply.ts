@@ -39,7 +39,7 @@ const msgMapping: {
   },
   util: {
     color: "#BA0202",
-    fileName: "gaming-bot.png",
+    fileName: "gaming-bot.jpg",
   },
 };
 

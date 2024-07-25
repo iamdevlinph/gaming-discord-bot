@@ -32,7 +32,7 @@ export async function execute(interaction: CommandInteraction) {
       );
 
       logger.info("Redeploying commands for guild", guildId);
-      await deployCommands({ guildId });
+      deployCommands({ guildId });
     });
   } catch (e) {
     logger.error("Failed in redeploying to guild", e);
