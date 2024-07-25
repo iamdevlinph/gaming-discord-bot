@@ -1,5 +1,6 @@
 import {
   ChatInputCommandInteraction,
+  EmbedBuilder,
   SlashCommandSubcommandBuilder,
 } from "discord.js";
 import logger from "node-color-log";
@@ -97,7 +98,14 @@ export const buyVp = async (interaction: ChatInputCommandInteraction) => {
       ? +valoPoints - +walletValoPoints
       : +valoPoints;
 
-  const totalPrice = calculateHowMuc(currency, valoPointsNum);
+  const embeds = new EmbedBuilder().setTitle(
+    `Buying ${valoPointsNum} valorant points`
+  );
+
+  const { totalPrice, pointsBreakdown, priceBreakdown } = calculateHowMuc(
+    currency,
+    valoPointsNum
+  );
 
   let msg = `${valoPointsNum.toLocaleString()} valorant points is worth ${totalPrice.toLocaleString()} ${currency}`;
 
@@ -108,17 +116,31 @@ export const buyVp = async (interaction: ChatInputCommandInteraction) => {
   ) {
     // const diff = (valoPointsNum - +walletValoPoints).toLocaleString();
     msg = `Since you currently have ${walletValoPoints} point(s)\n`;
-    msg += `you just need ${valoPointsNum.toLocaleString()} point(s)\n`;
+    msg += `you need ${valoPointsNum.toLocaleString()} point(s)\n`;
     msg += `which is worth ${totalPrice.toLocaleString()} ${currency}`;
   }
 
-  reply({ type: "valorant", interaction, embedContent: msg });
+  embeds.setDescription(msg);
+  embeds.addFields({
+    name: "Breakdown of points to buy",
+    value: pointsBreakdown.join("\n"),
+    inline: true,
+  });
+  embeds.addFields({
+    name: "Price",
+    value: priceBreakdown.join("\n"),
+    inline: true,
+  });
+
+  reply({ type: "valorant", interaction, embedContent: embeds });
 };
 
 function calculateHowMuc(
   currency: keyof VPPricesSchema["currencies"],
   points: number
 ) {
+  const pointsBreakdown: number[] = [];
+  const priceBreakdown: number[] = [];
   const pricesArr = toReversed(vpPrices?.currencies[currency] as number[]);
   const pointsArr = toReversed(vpPrices?.prices as number[]);
   let pointsCalc = points;
@@ -127,15 +149,19 @@ function calculateHowMuc(
     if (pointsCalc - pointsArr[ctr] < 0 && ctr === pointsArr.length - 1) {
       totalPrice += pricesArr[ctr];
       pointsCalc -= pointsArr[ctr];
+      priceBreakdown.push(pricesArr[ctr]);
+      pointsBreakdown.push(pointsArr[ctr]);
       break;
     }
 
     if (pointsCalc >= pointsArr[ctr]) {
       totalPrice += pricesArr[ctr];
       pointsCalc -= pointsArr[ctr];
+      priceBreakdown.push(pricesArr[ctr]);
+      pointsBreakdown.push(pointsArr[ctr]);
     } else {
       ctr++;
     }
   }
-  return totalPrice;
+  return { totalPrice, pointsBreakdown, priceBreakdown };
 }
