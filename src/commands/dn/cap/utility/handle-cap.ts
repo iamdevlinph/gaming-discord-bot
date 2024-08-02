@@ -7,7 +7,9 @@ import { EfmJsonSchema } from "../../efm/data/efm-schema";
 
 export const handleCap = (lb: number) => {
   const capValue = calculateCap(lb);
-  const embed = new EmbedBuilder().setTitle(`Stat cap for LB: ${lb}`);
+  const embed = new EmbedBuilder().setTitle(
+    `__**Town**__ stat cap for LB: ${lb}`
+  );
 
   if (lb < LOWEST_LB) {
     embed.setDescription("No cap values found");

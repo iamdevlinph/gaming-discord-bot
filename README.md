@@ -48,6 +48,8 @@ NOTE: The client id here is different from the testing one.
     - drop - armor fragments location
   - efm
     - debuffs - list efm debuffs and related destiny immunity
+  - nest - returns lunar drops of nest
+  - lunar_frags - returns nests with that lunar fragment
 - /genshin
   - version
 - /valorant
