@@ -114,7 +114,6 @@ export const buyVp = async (interaction: ChatInputCommandInteraction) => {
     +walletValoPoints > 0 &&
     +walletValoPoints < valoPointsNum
   ) {
-    // const diff = (valoPointsNum - +walletValoPoints).toLocaleString();
     msg = `Since you currently have ${walletValoPoints} point(s)\n`;
     msg += `you need ${valoPointsNum.toLocaleString()} point(s)\n`;
     msg += `which is worth ${totalPrice.toLocaleString()} ${currency}`;
