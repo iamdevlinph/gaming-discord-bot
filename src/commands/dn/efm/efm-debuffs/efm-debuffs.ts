@@ -6,6 +6,7 @@ import {
 } from "discord.js";
 import logger from "node-color-log";
 import { EfmJsonSchema } from "../data/efm-schema";
+import { findDebuffDetails } from "../utils/find-debuff-details";
 
 export const efmDebuffs = (interaction: ChatInputCommandInteraction) => {
   try {
@@ -42,9 +43,16 @@ export const efmDebuffs = (interaction: ChatInputCommandInteraction) => {
       }
     );
 
+    const debuffDetails = findDebuffDetails(
+      efmJson.debuffs,
+      efmJson.data.debuff
+    );
+
     embeds.addFields({
       name: "Current Debuff",
-      value: efmJson.data.debuff,
+      value: debuffDetails
+        ? `${debuffDetails.debuff} ${debuffDetails.penalty}`
+        : "N/A",
     });
 
     embeds.addFields({
@@ -60,4 +68,4 @@ export const efmDebuffs = (interaction: ChatInputCommandInteraction) => {
   }
 };
 
-function isCurrentDebuff(debuff, efmData) {}
+// function isCurrentDebuff(debuff, efmData) {}

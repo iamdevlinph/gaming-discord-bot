@@ -1,43 +1,45 @@
+import { ExpandRecursively } from "../../../../utils/type-utils";
+
 type CritDebuff = {
-  debuff: "anxiety";
-  destiny: "stable";
+  debuff: "Anxiety";
+  destiny: "Stable";
   penalty: string;
 };
 
 type CritDmgDebuff = {
-  debuff: "compulsion";
-  destiny: "relaxed";
+  debuff: "Compulsion";
+  destiny: "Relaxed";
   penalty: string;
 };
 
 type DefDebuff = {
-  debuff: "depression";
-  destiny: "cheerful";
+  debuff: "Depression";
+  destiny: "Cheerful";
   penalty: string;
 };
 
 type MDefDebuff = {
-  debuff: "despair";
-  destiny: "dependable";
+  debuff: "Despair";
+  destiny: "Dependable";
   penalty: string;
 };
 
 type FDDebuff = {
-  debuff: "doubt";
-  destiny: "reliable";
+  debuff: "Doubt";
+  destiny: "Reliable";
   penalty: string;
 };
 
-type Ordeals = "silence";
+type Ordeals = "Silence" | "Confusion";
 
-type Debuffs =
+export type Debuffs =
   | CritDebuff["debuff"]
   | CritDmgDebuff["debuff"]
   | DefDebuff["debuff"]
   | MDefDebuff["debuff"]
   | FDDebuff["debuff"];
 
-export type EfmJsonSchema = {
+export type EfmJsonSchema = ExpandRecursively<{
   debuffs: [CritDebuff, CritDmgDebuff, DefDebuff, MDefDebuff, FDDebuff];
   data: { debuff: Debuffs; ordeal: Ordeals };
-};
+}>;

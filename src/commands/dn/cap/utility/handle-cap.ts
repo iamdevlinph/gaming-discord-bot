@@ -4,6 +4,7 @@ import { LOWEST_LB } from "../data/constants";
 import logger from "node-color-log";
 import { readFile } from "@utils";
 import { EfmJsonSchema } from "../../efm/data/efm-schema";
+import { findDebuffDetails } from "../../efm/utils/find-debuff-details";
 
 export const handleCap = (lb: number) => {
   const capValue = calculateCap(lb);
@@ -42,10 +43,17 @@ export const handleCap = (lb: number) => {
       const baseFilePath = "/src/commands/dn/efm/data/efm.json";
       const efmData: EfmJsonSchema = JSON.parse(readFile({ baseFilePath }));
 
+      const debuffDetails = findDebuffDetails(
+        efmData.debuffs,
+        efmData.data.debuff
+      );
+
       embed.addFields(
         {
           name: "EFM Debuff",
-          value: efmData.data.debuff,
+          value: debuffDetails
+            ? `${debuffDetails.debuff} ${debuffDetails.penalty}`
+            : "N/A",
         },
         {
           name: "EFM Ordeal",

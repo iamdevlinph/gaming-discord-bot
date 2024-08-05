@@ -14,6 +14,7 @@ import {
 import { getLunarForNest } from "./utils/get-lunar-for-nest";
 import { readableLunar } from "./utils/readable-lunar";
 import { cacheCommand } from "../../../utils/cache-command";
+import logger from "node-color-log";
 
 export const NESTS_CATEGORY = "nests_category";
 export const LUNAR_CATEGORY = "lunar_category";
@@ -77,9 +78,11 @@ export const nestLunar = async (
     }`;
 
     if (cacheCommand.hasCache(CACHE_KEY)) {
+      logger.info("nestLunar", `${CACHE_KEY} cache exists`);
       const cacheData = cacheCommand.get(CACHE_KEY);
       embed.addFields(cacheData as APIEmbedField[]);
     } else {
+      logger.info("nestLunar", `${CACHE_KEY} cache DOES NOT exist`);
       const lunarData: { nest: AllNestsType; lunarFrags: AllLunarType[] }[] =
         [];
       if (isAllNests) {
