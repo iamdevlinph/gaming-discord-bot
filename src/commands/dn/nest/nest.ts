@@ -15,13 +15,26 @@ import { getLunarForNest } from "./utils/get-lunar-for-nest";
 import { readableLunar } from "./utils/readable-lunar";
 import { cacheCommand } from "../../../utils/cache-command";
 import logger from "node-color-log";
+import {
+  LUNAR_CATEGORIES_CACHE_KEY,
+  NEST_CATEGORIES_CACHE_KEY,
+} from "../../../utils/constants";
 
 export const NESTS_CATEGORY = "nests_category";
 export const LUNAR_CATEGORY = "lunar_category";
 
-const nestCategoryChoices = [...allNests].map((nest) => {
-  return { name: nest, value: nest };
-});
+const nestCategoryChoices = (() => {
+  if (cacheCommand.hasCache(NEST_CATEGORIES_CACHE_KEY)) {
+    return cacheCommand.get(NEST_CATEGORIES_CACHE_KEY) as typeof nestCategories;
+  }
+  const nestCategories = [...allNests].map((nest) => {
+    return { name: nest, value: nest };
+  });
+
+  cacheCommand.set(NEST_CATEGORIES_CACHE_KEY, nestCategories);
+
+  return nestCategories;
+})();
 
 export const nestCommand = (command: SlashCommandSubcommandBuilder) => {
   return command
@@ -36,11 +49,22 @@ export const nestCommand = (command: SlashCommandSubcommandBuilder) => {
     );
 };
 
-const lunarCategoryChoices = allLunar
-  .map((lunar) => {
-    return { name: lunar.name, value: lunar.name };
-  })
-  .sort((a, b) => a.value.localeCompare(b.value));
+const lunarCategoryChoices = (() => {
+  if (cacheCommand.hasCache(LUNAR_CATEGORIES_CACHE_KEY)) {
+    return cacheCommand.get(
+      LUNAR_CATEGORIES_CACHE_KEY
+    ) as typeof lunarCategories;
+  }
+  const lunarCategories = allLunar
+    .map((lunar) => {
+      return { name: lunar.name, value: lunar.name };
+    })
+    .sort((a, b) => a.value.localeCompare(b.value));
+
+  cacheCommand.set(LUNAR_CATEGORIES_CACHE_KEY, lunarCategories);
+
+  return lunarCategories;
+})();
 
 export const lunarCommand = (command: SlashCommandSubcommandBuilder) => {
   return command
@@ -61,11 +85,9 @@ export const nestLunar = async (
   interaction: ChatInputCommandInteraction,
   type: AcceptedTypes
 ) => {
-  console.log("🍉 ~ type:", type);
   const targetCategory =
     type === "lunar_frags" ? LUNAR_CATEGORY : NESTS_CATEGORY;
   const selectedCategory = interaction.options.getString(targetCategory);
-  console.log("🍉 ~ nest ~ selectedCategory:", selectedCategory);
 
   if (type === "nest") {
     const nest = selectedCategory as AllNestsType | null;
