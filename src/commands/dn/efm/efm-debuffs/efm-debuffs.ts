@@ -8,7 +8,10 @@ import logger from "node-color-log";
 import { EfmJsonSchema } from "../data/efm-schema";
 import { findDebuffDetails } from "../utils/find-debuff-details";
 
-export const efmDebuffs = (interaction: ChatInputCommandInteraction) => {
+export const efmDebuffs = (
+  interaction: ChatInputCommandInteraction,
+  persist = false
+) => {
   try {
     const embeds = new EmbedBuilder().setTitle("EFM Debuffs");
 
@@ -60,7 +63,7 @@ export const efmDebuffs = (interaction: ChatInputCommandInteraction) => {
       value: efmJson.data.ordeal,
     });
 
-    reply({ type: "dn", interaction, embedContent: embeds });
+    reply({ type: "dn", interaction, embedContent: embeds, persist });
   } catch (e) {
     const errorMsg = "Something went wrong with EFM debuffs";
     logger.error("efmDebuffs", errorMsg, e);

@@ -5,7 +5,10 @@ import {
   EmbedBuilder,
 } from "discord.js";
 
-export const armorDrop = (interaction: ChatInputCommandInteraction) => {
+export const armorDrop = (
+  interaction: ChatInputCommandInteraction,
+  persist = false
+) => {
   const embeds = new EmbedBuilder().setTitle(
     "Ancient armor fragments drop locations"
   );
@@ -43,5 +46,5 @@ export const armorDrop = (interaction: ChatInputCommandInteraction) => {
 
   embeds.addFields(fields);
 
-  reply({ type: "dn", interaction, embedContent: embeds });
+  reply({ type: "dn", interaction, embedContent: embeds, persist });
 };

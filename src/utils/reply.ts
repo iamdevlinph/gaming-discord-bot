@@ -14,7 +14,7 @@ type ReplyType = {
   type: MessageType;
   embedContent?: EmbedBuilder | string | Error;
   error?: Error;
-  persist?: boolean;
+  persist?: boolean | null;
 };
 
 const UTILS_IMG_PATH = "src/utils/img";
