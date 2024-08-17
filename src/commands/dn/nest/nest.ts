@@ -82,11 +82,11 @@ export const lunarCommand = (command: SlashCommandSubcommandBuilder) => {
     .addBooleanOption((option) => addPersistBooleanOption(option));
 };
 
-export type AcceptedTypes = "nest" | "lunar_frags";
+export type NestLunarTypes = "nest" | "lunar_frags";
 
 export const nestLunar = async (
   interaction: ChatInputCommandInteraction,
-  type: AcceptedTypes
+  type: NestLunarTypes
 ) => {
   const targetCategory =
     type === "lunar_frags" ? LUNAR_CATEGORY : NESTS_CATEGORY;
