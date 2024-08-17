@@ -4,8 +4,9 @@ import {
   SlashCommandSubcommandBuilder,
 } from "discord.js";
 import logger from "node-color-log";
-import { readFile, reply } from "@utils";
+import { addPersistBooleanOption, readFile, reply } from "@utils";
 import { VPPricesSchema } from "../data/vp-prices-schema";
+import { IS_PERSIST_NAME } from "../../../utils/constants";
 const toReversed = require("array.prototype.toreversed");
 
 let vpPrices: VPPricesSchema | undefined = undefined;
@@ -49,7 +50,8 @@ export const buyVpCommand = (command: SlashCommandSubcommandBuilder) => {
         .setDescription("Currency")
         .setRequired(true)
         .addChoices(currencyCategories)
-    );
+    )
+    .addBooleanOption((option) => addPersistBooleanOption(option));
 };
 
 export const buyVp = async (interaction: ChatInputCommandInteraction) => {
@@ -131,7 +133,9 @@ export const buyVp = async (interaction: ChatInputCommandInteraction) => {
     inline: true,
   });
 
-  reply({ type: "valorant", interaction, embedContent: embeds });
+  const persist = interaction.options.getBoolean(IS_PERSIST_NAME) ?? false;
+
+  reply({ type: "valorant", interaction, embedContent: embeds, persist });
 };
 
 function calculateHowMuc(

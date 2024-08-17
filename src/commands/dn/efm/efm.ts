@@ -3,7 +3,8 @@ import {
   SlashCommandSubcommandBuilder,
 } from "discord.js";
 import { efmDebuffs } from "./efm-debuffs/efm-debuffs";
-import { reply } from "@utils";
+import { addPersistBooleanOption, reply } from "@utils";
+import { IS_PERSIST_NAME } from "../../../utils/constants";
 
 const EFM_CATEGORY = "efm_category";
 
@@ -29,7 +30,8 @@ export const efmCommand = (command: SlashCommandSubcommandBuilder) => {
         .setDescription("Commands related to EFM")
         .setRequired(true)
         .addChoices(efmCategoryChoices)
-    );
+    )
+    .addBooleanOption((option) => addPersistBooleanOption(option));
 };
 
 export const efm = async (interaction: ChatInputCommandInteraction) => {
@@ -39,7 +41,8 @@ export const efm = async (interaction: ChatInputCommandInteraction) => {
 
   switch (selectedChoice) {
     case "debuffs":
-      return efmDebuffs(interaction);
+      const persist = interaction.options.getBoolean(IS_PERSIST_NAME) ?? false;
+      return efmDebuffs(interaction, persist);
     default:
       return reply({
         type: "dn",

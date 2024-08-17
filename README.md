@@ -50,6 +50,11 @@ NOTE: The client id here is different from the testing one.
     - debuffs - list efm debuffs and related destiny immunity
   - nest - returns lunar drops of nest
   - lunar_frags - returns nests with that lunar fragment
+  - conquest
+    - create - creates a conquest party
+    - start - starts a conquest and returns a line up
+    - end - ends a conquest
+    - join - join a conquest
 - /genshin
   - version
 - /valorant
@@ -62,11 +67,12 @@ NOTE: The client id here is different from the testing one.
 Dragon Nest SEA
 
 - [x] Town cap stats `/dn cap`
-- [ ] Armor fragment drops
+- [x] Armor fragment drops
 - [x] Current EFM debuff (in town cap stats)
-- [ ] Current EFM ordeal
-- [ ] Nest lunar fragment drop info `/dn nest lunar`
+- [x] Current EFM ordeal
+- [1/2] Nest lunar fragment drop info `/dn nest lunar`
 - [ ] Mark nest/dungeon as done (nests, efm, etc...)
+- [ ] Manage conquest
 
 Genshin Impact
 

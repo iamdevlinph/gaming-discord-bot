@@ -3,7 +3,8 @@ import {
   SlashCommandSubcommandBuilder,
 } from "discord.js";
 import { handleCap } from "./utility/handle-cap";
-import { reply } from "@utils";
+import { addPersistBooleanOption, reply } from "@utils";
+import { IS_PERSIST_NAME } from "../../../utils/constants";
 
 export const capCommand = (command: SlashCommandSubcommandBuilder) => {
   return command
@@ -14,7 +15,8 @@ export const capCommand = (command: SlashCommandSubcommandBuilder) => {
         .setName("lb")
         .setDescription("Labyrinth floor cap")
         .setRequired(true)
-    );
+    )
+    .addBooleanOption((option) => addPersistBooleanOption(option));
 };
 
 export const cap = async (interaction: ChatInputCommandInteraction) => {
@@ -28,6 +30,7 @@ export const cap = async (interaction: ChatInputCommandInteraction) => {
     });
   }
 
+  const persist = interaction.options.getBoolean(IS_PERSIST_NAME) ?? false;
   const embeds = handleCap(parseInt(lb));
-  await reply({ type: "dn", interaction, embedContent: embeds });
+  await reply({ type: "dn", interaction, embedContent: embeds, persist });
 };

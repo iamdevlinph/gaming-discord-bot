@@ -4,7 +4,7 @@ import {
   EmbedBuilder,
   SlashCommandSubcommandBuilder,
 } from "discord.js";
-import { reply } from "@utils";
+import { addPersistBooleanOption, reply } from "@utils";
 import {
   allLunar,
   AllLunarType,
@@ -16,6 +16,7 @@ import { readableLunar } from "./utils/readable-lunar";
 import { cacheCommand } from "../../../utils/cache-command";
 import logger from "node-color-log";
 import {
+  IS_PERSIST_NAME,
   LUNAR_CATEGORIES_CACHE_KEY,
   NEST_CATEGORIES_CACHE_KEY,
 } from "../../../utils/constants";
@@ -46,7 +47,8 @@ export const nestCommand = (command: SlashCommandSubcommandBuilder) => {
         .setDescription("Commands related to nest")
         .setRequired(false)
         .addChoices(nestCategoryChoices)
-    );
+    )
+    .addBooleanOption((option) => addPersistBooleanOption(option));
 };
 
 const lunarCategoryChoices = (() => {
@@ -76,19 +78,22 @@ export const lunarCommand = (command: SlashCommandSubcommandBuilder) => {
         .setDescription("Commands related to lunar fragments")
         .setRequired(false)
         .addChoices(lunarCategoryChoices)
-    );
+    )
+    .addBooleanOption((option) => addPersistBooleanOption(option));
 };
 
-export type AcceptedTypes = "nest" | "lunar_frags";
+export type NestLunarTypes = "nest" | "lunar_frags";
 
 export const nestLunar = async (
   interaction: ChatInputCommandInteraction,
-  type: AcceptedTypes
+  type: NestLunarTypes
 ) => {
   const targetCategory =
     type === "lunar_frags" ? LUNAR_CATEGORY : NESTS_CATEGORY;
   const selectedCategory = interaction.options.getString(targetCategory);
   console.log("🍉 ~ nest ~ selectedCategory:", selectedCategory);
+
+  const persist = interaction.options.getBoolean(IS_PERSIST_NAME) ?? false;
 
   if (type === "nest") {
     const nest = selectedCategory as AllNestsType | null;
@@ -151,6 +156,7 @@ export const nestLunar = async (
       type: "dn",
       interaction,
       embedContent: embed,
+      persist,
     });
   }
 

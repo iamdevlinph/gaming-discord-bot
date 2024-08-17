@@ -3,7 +3,8 @@ import {
   SlashCommandSubcommandBuilder,
 } from "discord.js";
 import { armorDrop } from "./armor-drop/armor-drop";
-import { reply } from "@utils";
+import { addPersistBooleanOption, reply } from "@utils";
+import { IS_PERSIST_NAME } from "../../../utils/constants";
 
 const ARMOR_CATEGORY = "armor_category";
 
@@ -29,7 +30,8 @@ export const armorCommand = (command: SlashCommandSubcommandBuilder) => {
         .setDescription("Commands related to armor")
         .setRequired(true)
         .addChoices(armorCategoryChoices)
-    );
+    )
+    .addBooleanOption((option) => addPersistBooleanOption(option));
 };
 
 export const armor = async (interaction: ChatInputCommandInteraction) => {
@@ -39,7 +41,8 @@ export const armor = async (interaction: ChatInputCommandInteraction) => {
 
   switch (selectedChoice) {
     case "armor_drop":
-      return armorDrop(interaction);
+      const persist = interaction.options.getBoolean(IS_PERSIST_NAME) ?? false;
+      return armorDrop(interaction, persist);
     default:
       return reply({
         type: "dn",
