@@ -32,7 +32,7 @@ export const cacheCommand = {
     return null;
   },
   hasCache: (key: string) =>
-    cacheData.hasOwnProperty(key) &&
+    cacheData?.hasOwnProperty(key) &&
     cacheData[key] !== undefined &&
     cacheData[key] !== null,
   set: (key: string, data: Object) => {
