@@ -24,13 +24,17 @@ import {
 export const NESTS_CATEGORY = "nests_category";
 export const LUNAR_CATEGORY = "lunar_category";
 
+type ExtendedNest = (typeof allNests)[number] | "All";
+
 const nestCategoryChoices = (() => {
   if (cacheCommand.hasCache(NEST_CATEGORIES_CACHE_KEY)) {
     return cacheCommand.get(NEST_CATEGORIES_CACHE_KEY) as typeof nestCategories;
   }
   const nestCategories = [...allNests].map((nest) => {
     return { name: nest, value: nest };
-  });
+  }) as Array<{ name: ExtendedNest; value: ExtendedNest }>;
+
+  nestCategories.unshift({ name: "All", value: "All" });
 
   cacheCommand.set(NEST_CATEGORIES_CACHE_KEY, nestCategories);
 
@@ -45,7 +49,7 @@ export const nestCommand = (command: SlashCommandSubcommandBuilder) => {
       option
         .setName(NESTS_CATEGORY)
         .setDescription("Commands related to nest")
-        .setRequired(false)
+        .setRequired(true)
         .addChoices(nestCategoryChoices)
     )
     .addBooleanOption((option) => addPersistBooleanOption(option));
@@ -96,8 +100,8 @@ export const nestLunar = async (
   const persist = interaction.options.getBoolean(IS_PERSIST_NAME) ?? false;
 
   if (type === "nest") {
-    const nest = selectedCategory as AllNestsType | null;
-    const isAllNests = !nest;
+    const nest = selectedCategory as AllNestsType;
+    const isAllNests = nest.toLowerCase() === "all";
     const embed = new EmbedBuilder().setTitle(
       `Lunar fragments for ${isAllNests ? "all nests" : nest}:`
     );
