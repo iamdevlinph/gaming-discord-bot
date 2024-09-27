@@ -30,7 +30,26 @@ type FDDebuff = {
   penalty: string;
 };
 
-type Ordeals = "Silence" | "Confusion";
+type Ordeals = "Silence" | "Confusion" | "Decreasing HP";
+
+const ordeals = [
+  {
+    name: "Silent Depths",
+    effect: "Silence - cannot cast skills",
+  },
+  {
+    name: "Cursed Depths",
+    effect: "Decreasing HP and disable recovery",
+  },
+  {
+    name: "Shackled Depths",
+    effect: "Cannot tumble and dash",
+  },
+  {
+    name: "Depths of Weakness",
+    effect: "Slove movement",
+  },
+];
 
 export type Debuffs =
   | CritDebuff["debuff"]
