@@ -42,6 +42,7 @@ client.on("guildCreate", async (guild) => {
   await deployCommands({ guildId: guild.id });
 });
 
+// https://dev.to/fellipeutaka/creating-your-first-discord-bot-using-typescript-1eh6
 client.on("interactionCreate", async (interaction) => {
   if (!interaction.isCommand()) {
     return;
