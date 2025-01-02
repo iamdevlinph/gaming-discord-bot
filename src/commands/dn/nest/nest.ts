@@ -21,7 +21,7 @@ import {
   NEST_CATEGORIES_CACHE_KEY,
 } from "../../../utils/constants";
 
-export const NESTS_CATEGORY = "nest";
+export const NESTS_CATEGORY = "nest_name";
 export const LUNAR_CATEGORY = "lunar_fragment";
 
 type ExtendedNest = (typeof allNests)[number] | "All";
