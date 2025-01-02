@@ -27,7 +27,7 @@ Based on [Creating your first Discord bot using TypeScript](https://dev.to/felli
 
 No fancy stuff yet
 
-1. Go to [AWS](us-east-2.console.aws.amazon.com)
+1. Go to [Digital Ocean](https://cloud.digitalocean.com/droplets/)
 2. Pull changes
 3. Install packages if needed
 4. Run app by `pm2 start npm --name "gaming-bot" -- run start`
