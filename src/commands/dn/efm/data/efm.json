@@ -27,7 +27,11 @@
     }
   ],
   "data": {
-    "debuff": "Anxiety",
-    "ordeal": "Confusion"
+    "debuff": "Compulsion",
+    "ordeal": "Movement debuff"
+  },
+  "jan2025_data": {
+    "debuff": "Depression",
+    "ordeal": "Silence"
   }
 }
