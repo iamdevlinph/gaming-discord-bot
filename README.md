@@ -14,6 +14,15 @@ As of writing
 
 Based on [Creating your first Discord bot using TypeScript](https://dev.to/fellipeutaka/creating-your-first-discord-bot-using-typescript-1eh6)
 
+#### Commands
+
+| Command     | Description                                   |
+| ----------- | --------------------------------------------- |
+| build       | Builds the app                                |
+| dev         | Run app on dev mode                           |
+| start       | Builds and starts the app. Use for production |
+| cache:reset | Deletes the cache file                        |
+
 #### ENV File
 
 | Name               | Required? | Description                                        |
