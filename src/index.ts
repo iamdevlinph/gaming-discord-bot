@@ -29,12 +29,18 @@ client.once("ready", async () => {
 
   // await overwriteCommands();
 
+  const RUN_THIS = false;
+
   // hot reload if DEVELOPER_GUILD_ID is provided and when development
-  // if (config.DEVELOPER_GUILD_ID && config.STAGE_ENV !== "production") {
-  //   const guild = client.guilds.cache.get(config.DEVELOPER_GUILD_ID);
-  //   await guild?.commands.set([]);
-  //   await hotReloadCommands({ guildId: config.DEVELOPER_GUILD_ID });
-  // }
+  if (
+    RUN_THIS &&
+    config.DEVELOPER_GUILD_ID &&
+    config.STAGE_ENV !== "production"
+  ) {
+    const guild = client.guilds.cache.get(config.DEVELOPER_GUILD_ID);
+    await guild?.commands.set([]);
+    await hotReloadCommands({ guildId: config.DEVELOPER_GUILD_ID });
+  }
 });
 
 client.on("guildCreate", async (guild) => {
