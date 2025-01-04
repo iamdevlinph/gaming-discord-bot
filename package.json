@@ -12,7 +12,10 @@
   "scripts": {
     "build": "tsup src/index.ts --minify",
     "dev": "tsx watch src/index.ts",
-    "start": "npm run build; node dist/index.js"
+    "start": "npm run build; node dist/index.js",
+    "cache:delete": "rm -rf src/utils/cache/cache-data.json",
+    "cache:create": "echo '{}' >> src/utils/cache/cache-data.json",
+    "cache:reset": "npm run cache:delete; npm run cache:create"
   },
   "dependencies": {
     "array.prototype.toreversed": "1.1.2",

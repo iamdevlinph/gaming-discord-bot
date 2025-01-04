@@ -14,6 +14,18 @@ As of writing
 
 Based on [Creating your first Discord bot using TypeScript](https://dev.to/fellipeutaka/creating-your-first-discord-bot-using-typescript-1eh6)
 
+#### Commands
+
+| Command      | Description                                   |
+| ------------ | --------------------------------------------- |
+| build        | Builds the app                                |
+| dev          | Run app on dev mode                           |
+| start        | Builds and starts the app. Use for production |
+|              |                                               |
+| cache:delete | Deletes the cache file                        |
+| cache:create | Create the cache file                         |
+| cache:reset  | Runs cache delete and create                  |
+
 #### ENV File
 
 | Name               | Required? | Description                                        |
@@ -22,6 +34,7 @@ Based on [Creating your first Discord bot using TypeScript](https://dev.to/felli
 | DISCORD_CLIENT_ID  | Yes       | Discord client id                                  |
 | ADMIN_IDS          | Yes       | Comma separated list of IDs with admin permissions |
 | DEVELOPER_GUILD_ID | No        | Deploy commands for testing and developer          |
+| SKIP_CACHE         | No        | Do not create cache                                |
 
 ## Production
 

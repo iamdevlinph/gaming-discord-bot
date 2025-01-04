@@ -6,7 +6,7 @@ import {
   nestCommand,
   lunarCommand,
   nestLunar,
-  AcceptedTypes,
+  NestLunarTypes,
 } from "./nest/nest";
 
 type DNCommands = "cap" | "armor" | "efm" | "nest" | "lunar_frags";
@@ -35,7 +35,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
     }
     case "nest":
     case "lunar_frags": {
-      return nestLunar(interaction, subCommand as AcceptedTypes);
+      return nestLunar(interaction, subCommand as NestLunarTypes);
     }
   }
 }
