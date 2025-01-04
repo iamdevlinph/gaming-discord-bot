@@ -95,7 +95,6 @@ export const nestLunar = async (
   const targetCategory =
     type === "lunar_frags" ? LUNAR_CATEGORY : NESTS_CATEGORY;
   const selectedCategory = interaction.options.getString(targetCategory);
-  console.log("🍉 ~ nest ~ selectedCategory:", selectedCategory);
 
   const persist = interaction.options.getBoolean(IS_PERSIST_NAME) ?? false;
 

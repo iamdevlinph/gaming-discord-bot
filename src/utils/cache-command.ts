@@ -2,6 +2,7 @@ import { readFile } from "@utils";
 import logger from "node-color-log";
 import { writeFile } from "./write-file";
 import { doesFileExist } from "./does-file-exist";
+import { config } from "../config";
 
 const CACHE_FILE_PATH = "src/utils/cache/cache-data.json";
 
@@ -32,6 +33,7 @@ export const cacheCommand = {
     return null;
   },
   hasCache: (key: string) =>
+    config.SKIP_CACHE !== true &&
     cacheData?.hasOwnProperty(key) &&
     cacheData[key] !== undefined &&
     cacheData[key] !== null,

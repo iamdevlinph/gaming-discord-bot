@@ -9,6 +9,7 @@ const {
   ADMIN_IDS,
   DEVELOPER_GUILD_ID,
   STAGE_ENV = "development",
+  SKIP_CACHE,
 } = process.env;
 
 if (!DISCORD_TOKEN || !DISCORD_CLIENT_ID || !DEVELOPER_GUILD_ID || !ADMIN_IDS) {
@@ -24,4 +25,5 @@ export const config = {
   PUBLIC_COMMANDS: ["dn", "genshin", "ping", "about", "valorant"],
   DEVELOPER_COMMANDS: ["redeploy", "get-servers"],
   STAGE_ENV,
+  SKIP_CACHE: Boolean(SKIP_CACHE),
 };
