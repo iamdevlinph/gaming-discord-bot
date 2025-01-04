@@ -16,12 +16,15 @@ Based on [Creating your first Discord bot using TypeScript](https://dev.to/felli
 
 #### Commands
 
-| Command     | Description                                   |
-| ----------- | --------------------------------------------- |
-| build       | Builds the app                                |
-| dev         | Run app on dev mode                           |
-| start       | Builds and starts the app. Use for production |
-| cache:reset | Deletes the cache file                        |
+| Command      | Description                                   |
+| ------------ | --------------------------------------------- |
+| build        | Builds the app                                |
+| dev          | Run app on dev mode                           |
+| start        | Builds and starts the app. Use for production |
+|              |                                               |
+| cache:delete | Deletes the cache file                        |
+| cache:create | Create the cache file                         |
+| cache:reset  | Runs cache delete and create                  |
 
 #### ENV File
 
