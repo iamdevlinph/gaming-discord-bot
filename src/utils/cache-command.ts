@@ -38,6 +38,7 @@ export const cacheCommand = {
     cacheData[key] !== undefined &&
     cacheData[key] !== null,
   set: (key: string, data: Object) => {
+    logger.info("Creating cache for:", key);
     return writeFile({
       baseFilePath: CACHE_FILE_PATH,
       content: { ...cacheData, [key]: data },
