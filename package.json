@@ -19,13 +19,13 @@
   },
   "dependencies": {
     "array.prototype.toreversed": "1.1.2",
-    "discord.js": "14.15.3",
-    "dotenv": "16.4.5"
+    "discord.js": "14.17.3",
+    "dotenv": "16.4.7"
   },
   "devDependencies": {
     "node-color-log": "12.0.1",
-    "tsup": "8.1.0",
-    "tsx": "4.16.2",
-    "typescript": "5.5.3"
+    "tsup": "8.3.6",
+    "tsx": "4.19.2",
+    "typescript": "5.7.3"
   }
 }
