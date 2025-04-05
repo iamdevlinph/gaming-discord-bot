@@ -29,5 +29,9 @@
   "data": {
     "debuff": "Depression",
     "ordeal": "Cursed Depths - decreasing HP and eliminating recovery abilities"
+  },
+  "_april_2025": {
+    "debuff": "Despair",
+    "ordeal": "Shackled Depths - preventing the use of Tumble and Dash"
   }
 }
